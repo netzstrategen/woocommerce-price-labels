@@ -37,3 +37,4 @@ register_deactivation_hook(__FILE__, __NAMESPACE__ . '\Schema::deactivate');
 register_uninstall_hook(__FILE__, __NAMESPACE__ . '\Schema::uninstall');
 
 add_action('init', __NAMESPACE__ . '\Plugin::init', 20);
+add_action('admin_init', __NAMESPACE__ . '\Admin::init');

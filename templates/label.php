@@ -44,5 +44,8 @@ namespace Netzstrategen\WooCommerce\PriceLabels;
     </tr>
   <?php endforeach; ?>
 </table>
+<p>
+    <img src="<?= $qr_code ?>"" />
+</p>
 </body>
 </html>

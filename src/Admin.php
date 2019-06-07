@@ -7,6 +7,7 @@
 
 namespace Netzstrategen\WooCommerce\PriceLabels;
 
+use Endroid\QrCode\QrCode;
 
 /**
  * Administrative back-end functionality.
@@ -14,6 +15,20 @@ namespace Netzstrategen\WooCommerce\PriceLabels;
 class Admin {
 
   const PDF_LABEL_PRINT_BUTTON = 'Print Sale PDF label';
+
+  const PDF_LABEL_FORMATS = [
+    'A5|portrait|12px' => 'A5, portrait',
+    'A4|portrait|16px' => 'A4, portrait',
+    'A3|portrait|24px' => 'A3, portrait',
+    'A3|landscape|24px' => 'A3, landscape',
+  ];
+
+  /**
+   * Size of QR code to include in the PDF label document.
+   *
+   * @integer
+   */
+  const QR_CODE_SIZE = 400;
 
   /**
    * @implements admin_init
@@ -201,6 +216,30 @@ class Admin {
     }
 
     return apply_filters(Plugin::PREFIX . '_product_data', $product_data);
+  }
+
+  /**
+   * Generates the QR code graphic of a given content.
+   *
+   * @param string $content
+   *   Content to encode as QR.
+   * @param int $size
+   *   Size in pixels of the QR code graphic.
+   * @param string $type
+   *   Graphic type: jpg, png.
+   *
+   * @return string
+   *   QR code.
+   */
+  public static function getProductQrCode($content, $size = 400, $type = 'png') {
+    $qrCode = new QrCode(get_permalink($content));
+    ob_start();
+    header('Content-Type: ' . $qrCode->getContentType());
+    $qrCode->setSize($size);
+    $qrCode->setWriterByName($type);
+    echo $qrCode->writeString();
+
+    return ob_get_clean();
   }
 
 }

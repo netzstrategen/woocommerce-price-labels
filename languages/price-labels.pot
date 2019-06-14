@@ -1,0 +1,111 @@
+#, fuzzy
+msgid ""
+msgstr ""
+"Plural-Forms: nplurals=INTEGER; plural=EXPRESSION;\n"
+"Project-Id-Version: woocommerce-price-label\n"
+"POT-Creation-Date: 2019-07-12 07:16+0200\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: Poedit 2.2.3\n"
+"X-Poedit-Basepath: ..\n"
+"X-Poedit-Flags-xgettext: --add-comments=translators:\n"
+"X-Poedit-WPHeader: plugin.php\n"
+"X-Poedit-SourceCharset: UTF-8\n"
+"X-Poedit-KeywordsList: __;_e;_n:1,2;_x:1,2c;_ex:1,2c;_nx:4c,1,2;esc_attr__;"
+"esc_attr_e;esc_attr_x:1,2c;esc_html__;esc_html_e;esc_html_x:1,2c;"
+"_n_noop:1,2;_nx_noop:3c,1,2;__ngettext_noop:1,2\n"
+"PO-Revision-Date: \n"
+"Last-Translator: \n"
+"Language-Team: netzstrategen\n"
+"X-Poedit-SearchPath-0: .\n"
+"X-Poedit-SearchPathExcluded-0: *.min.js\n"
+"X-Poedit-SearchPathExcluded-1: vendor\n"
+
+#: src/Admin.php:68
+msgid "Prices label"
+msgstr ""
+
+#: src/Admin.php:72
+msgid "Attributes to print"
+msgstr ""
+
+#: src/Admin.php:75
+msgid "Select the attributes to print in the product prices label."
+msgstr ""
+
+#: src/Admin.php:163
+msgid "Dimensions (LWH)"
+msgstr ""
+
+#: src/Admin.php:255
+msgid "Prices label PDF"
+msgstr ""
+
+#: src/Admin.php:270
+msgid "Price label PDF settings"
+msgstr ""
+
+#: src/Admin.php:272
+msgid "The following options are used to configure the product prices label"
+msgstr ""
+
+#: src/Admin.php:276
+msgid "Default label format"
+msgstr ""
+
+#: src/Admin.php:360
+msgid "SKU"
+msgstr ""
+
+#: src/Admin.php:364
+msgid "ERP/ID"
+msgstr ""
+
+#: src/Admin.php:369
+msgid "Dimensions"
+msgstr ""
+
+#: src/Admin.php:374
+msgid "Weight"
+msgstr ""
+
+#: templates/label-portrait.php:177
+msgid "Exhibit"
+msgstr ""
+
+#: templates/label-portrait.php:183
+msgid "Instead of"
+msgstr ""
+
+#: templates/label-portrait.php:187
+msgid "Now"
+msgstr ""
+
+#: templates/label-portrait.php:207
+msgid ""
+"Scan this QR code with your smartphone camera. This will take you directly "
+"to the item in our online shop with more information and details."
+msgstr ""
+
+#: templates/label-portrait.php:211
+msgid ""
+"These are collection prices in EUR incl. VAT. Shipping possible against "
+"surcharge. Errors without prior sale reserve."
+msgstr ""
+
+#. Plugin Name of the plugin/theme
+msgid "WooCommerce Price Labels"
+msgstr ""
+
+#. Description of the plugin/theme
+msgid "Generate price label PDFs for WooCommerce products."
+msgstr ""
+
+#. Author of the plugin/theme
+msgid "netzstrategen"
+msgstr ""
+
+#. Author URI of the plugin/theme
+msgid "https://netzstrategen.com/sind"
+msgstr ""

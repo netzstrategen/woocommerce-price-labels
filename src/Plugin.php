@@ -17,7 +17,7 @@ class Plugin {
    *
    * @var string
    */
-  const PREFIX = 'price-labels';
+  const PREFIX = 'woocommerce-price-labels';
 
   /**
    * Gettext localization domain.

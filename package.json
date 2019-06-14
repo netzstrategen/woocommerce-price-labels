@@ -1,6 +1,6 @@
 {
   "version": "1.0.0",
-  "title": "price-labels",
+  "title": "woocommerce-price-labels",
   "description": "Generate price label PDFs for WooCommerce products.",
   "dependencies": {
     "@netzstrategen/gulp-task-collection": "^1.0.3"

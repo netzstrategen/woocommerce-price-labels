@@ -1,6 +1,6 @@
 <?php
 
-namespace Netzstrategen\WooCommerce\PriceLabels;
+namespace Netzstrategen\PriceLabels;
 
 ?>
 

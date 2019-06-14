@@ -2,10 +2,10 @@
 
 /**
  * @file
- * Contains \Netzstrategen\WooCommerce\PriceLabels\Plugin.
+ * Contains \Netzstrategen\WooCommercePriceLabels\Admin.
  */
 
-namespace Netzstrategen\WooCommerce\PriceLabels;
+namespace Netzstrategen\WooCommercePriceLabels;
 
 use Endroid\QrCode\QrCode;
 

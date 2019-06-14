@@ -2,10 +2,10 @@
 
 /**
  * @file
- * Contains \Netzstrategen\WooCommerce\PriceLabels\Schema.
+ * Contains \Netzstrategen\WooCommercePriceLabels\Schema.
  */
 
-namespace Netzstrategen\WooCommerce\PriceLabels;
+namespace Netzstrategen\WooCommercePriceLabels;
 
 /**
  * Generic plugin lifetime and maintenance functionality.

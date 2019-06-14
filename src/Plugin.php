@@ -2,10 +2,10 @@
 
 /**
  * @file
- * Contains \Netzstrategen\WooCommerce\PriceLabels\Plugin.
+ * Contains \Netzstrategen\WooCommercePriceLabels\Plugin.
  */
 
-namespace Netzstrategen\WooCommerce\PriceLabels;
+namespace Netzstrategen\WooCommercePriceLabels;
 
 /**
  * Main front-end functionality.
@@ -17,7 +17,7 @@ class Plugin {
    *
    * @var string
    */
-  const PREFIX = 'woocommerce-price-labels';
+  const PREFIX = 'price-labels';
 
   /**
    * Gettext localization domain.

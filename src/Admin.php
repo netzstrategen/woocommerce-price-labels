@@ -14,6 +14,11 @@ use Endroid\QrCode\QrCode;
  */
 class Admin {
 
+  /**
+   * Text for PDF label print button.
+   *
+   * @string
+   */
   const PDF_LABEL_PRINT_BUTTON = 'Print Sale PDF label';
 
   const PDF_LABEL_FORMATS = [
@@ -61,7 +66,17 @@ class Admin {
       $labelFormat = explode('|', get_option(Plugin::PREFIX . '-format'));
     }
 
+    $regular_price = $product->get_regular_price();
+    $sale_price = $product->get_sale_price() ?: $regular_price;
+    if ($regular_price > $sale_price) {
+      $discount_percentage = round(100 * ($regular_price - $sale_price) / $regular_price);
+    }
+    else {
+      $discount_percentage = 0;
+    }
+
     $data = [
+      'label_logo' => Plugin::getBasePath() . '/templates/images/label-logo.png',
       'title' => $product->get_title(),
       'price' => wc_price($product->get_price()),
       'regular_price' => wc_price($regular_price),
@@ -88,8 +103,6 @@ class Admin {
   }
 
   public static function woocommerce_product_options_pricing() {
-    global $post;
-
     $link = add_query_arg('action', 'label');
     echo '<p><a class="button" href="' . $link . '" target="blank">' . __(static::PDF_LABEL_PRINT_BUTTON, Plugin::L10N) . '</a></p>';
   }

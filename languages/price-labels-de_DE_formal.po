@@ -1,0 +1,105 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: woocommerce-price-label\n"
+"POT-Creation-Date: 2019-07-12 07:16+0200\n"
+"PO-Revision-Date: \n"
+"Last-Translator: Joan López <joan@netzstrategen.com>\n"
+"Language-Team: netzstrategen\n"
+"Language: de\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: Poedit 2.2.3\n"
+
+#: src/Admin.php:68
+msgid "Prices label"
+msgstr ""
+
+#: src/Admin.php:72
+msgid "Attributes to print"
+msgstr ""
+
+#: src/Admin.php:75
+msgid "Select the attributes to print in the product prices label."
+msgstr ""
+
+#: src/Admin.php:163
+msgid "Dimensions (LWH)"
+msgstr "Maße (LBH)"
+
+#: src/Admin.php:255
+msgid "Prices label PDF"
+msgstr ""
+
+#: src/Admin.php:270
+msgid "Price label PDF settings"
+msgstr ""
+
+#: src/Admin.php:272
+msgid "The following options are used to configure the product prices label"
+msgstr ""
+
+#: src/Admin.php:276
+msgid "Default label format"
+msgstr ""
+
+#: src/Admin.php:360
+msgid "SKU"
+msgstr "SKU"
+
+#: src/Admin.php:364
+msgid "ERP/ID"
+msgstr "ERP/ID"
+
+#: src/Admin.php:369
+msgid "Dimensions"
+msgstr "Maße"
+
+#: src/Admin.php:374
+msgid "Weight"
+msgstr "Gewicht"
+
+#: templates/label-portrait.php:177
+msgid "Exhibit"
+msgstr "Ausstellungsstück"
+
+#: templates/label-portrait.php:183
+msgid "Instead of"
+msgstr "statt"
+
+#: templates/label-portrait.php:187
+msgid "Now"
+msgstr "jetzt"
+
+#: templates/label-portrait.php:207
+msgid ""
+"Scan this QR code with your smartphone camera. This will take you directly "
+"to the item in our online shop with more information and details."
+msgstr ""
+"Scannen Sie diesen QR-Code mit Ihrer Smartphone-Kamera. Sie gelangen so "
+"direkt zum Artikel in unserem Onlineshop mit vielen weiteren Infos und "
+"Details."
+
+#: templates/label-portrait.php:211
+msgid ""
+"These are collection prices in EUR incl. VAT. Shipping possible against "
+"surcharge. Errors without prior sale reserve."
+msgstr ""
+"Dies sind Abholpreise in EUR inkl. MwSt. Versand möglich gegen Aufpreis. "
+"Irrtum und Zwischenverkauf vorbehalten."
+
+#. Plugin Name of the plugin/theme
+msgid "WooCommerce Price Labels"
+msgstr ""
+
+#. Description of the plugin/theme
+msgid "Generate price label PDFs for WooCommerce products."
+msgstr ""
+
+#. Author of the plugin/theme
+msgid "netzstrategen"
+msgstr ""
+
+#. Author URI of the plugin/theme
+msgid "https://netzstrategen.com/sind"
+msgstr ""

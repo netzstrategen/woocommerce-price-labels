@@ -90,4 +90,11 @@ class Plugin {
     }
   }
 
+  /**
+   * Loads the plugin textdomain.
+   */
+  public static function loadTextdomain() {
+    load_plugin_textdomain(static::L10N, FALSE, static::L10N . '/languages/');
+  }
+
 }

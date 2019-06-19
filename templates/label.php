@@ -12,7 +12,7 @@ namespace Netzstrategen\PriceLabels;
     html,
     body {
       width: 100%;
-      font-size: 16px;
+      font-size: <?= $font_base_size ?>;
     }
 
     * {
@@ -27,15 +27,15 @@ namespace Netzstrategen\PriceLabels;
     }
 
     h1 {
-      margin-top: 24px;
-      padding-bottom: 8px;
-      font-size: 40px;
+      margin-top: 1.5rem;
+      padding-bottom: 0.5rem;
+      font-size: 2.5rem;
       text-transform: uppercase;
       text-align: center;
     }
 
     h2 {
-      font-size: 40px;
+      font-size: 2.5rem;
     }
 
     th {
@@ -48,7 +48,7 @@ namespace Netzstrategen\PriceLabels;
     }
 
     .container {
-      margin: 0 24px;
+      margin: 0 1.5rem;
     }
 
     .prices {
@@ -86,9 +86,14 @@ namespace Netzstrategen\PriceLabels;
       width: 50%;
     }
 
+    .prices__regular h2,
+    .prices__regular p {
+      margin-right: 3rem;
+    }
+
     .prices__sale,
     .prices__regular {
-      padding: 20px 0;
+      padding: 1.25rem 0;
       text-align: center;
     }
 
@@ -100,8 +105,13 @@ namespace Netzstrategen\PriceLabels;
       color: #d12d37;
     }
 
+    .prices__sale h2,
+    .prices__sale p {
+      margin-left: 3rem;
+    }
+
     .prices__amount {
-      font-size: 50px;
+      font-size: 3.125rem;
     }
 
     .prices__sale h2 {
@@ -109,7 +119,7 @@ namespace Netzstrategen\PriceLabels;
     }
 
     .details {
-      margin-bottom: 16px;
+      margin-bottom: 1rem;
     }
 
     .details,
@@ -149,12 +159,12 @@ namespace Netzstrategen\PriceLabels;
 
     .footer {
       position: fixed;
-      right: 16px;
-      bottom: 32px;
-      left: 16px;
-      padding: 4px;
+      right: 1rem;
+      bottom: 2rem;
+      left: 1rem;
+      padding: 0.25rem;
       border-top: 1px black solid;
-      font-size: 0.9em;
+      font-size: 0.8rem;
       text-align: center;
     }
   </style>

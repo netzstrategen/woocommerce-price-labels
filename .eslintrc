@@ -1,0 +1,6 @@
+{
+  "extends": ["eslint:recommended", "google"],
+  "rules": {
+    "brace-style": ["error", "stroustrup"]
+  }
+}

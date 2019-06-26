@@ -1,7 +1,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: woocommerce-price-label\n"
-"POT-Creation-Date: 2019-07-12 07:16+0200\n"
+"POT-Creation-Date: 2019-07-12 08:17+0200\n"
 "PO-Revision-Date: \n"
 "Last-Translator: Joan López <joan@netzstrategen.com>\n"
 "Language-Team: netzstrategen\n"
@@ -23,39 +23,39 @@ msgstr ""
 msgid "Select the attributes to print in the product prices label."
 msgstr ""
 
-#: src/Admin.php:163
+#: src/Admin.php:156
 msgid "Dimensions (LWH)"
 msgstr "Maße (LBH)"
 
-#: src/Admin.php:255
+#: src/Admin.php:248
 msgid "Prices label PDF"
 msgstr ""
 
-#: src/Admin.php:270
+#: src/Admin.php:262
 msgid "Price label PDF settings"
 msgstr ""
 
-#: src/Admin.php:272
+#: src/Admin.php:264
 msgid "The following options are used to configure the product prices label"
 msgstr ""
 
-#: src/Admin.php:276
+#: src/Admin.php:268
 msgid "Default label format"
 msgstr ""
 
-#: src/Admin.php:360
+#: src/Admin.php:352
 msgid "SKU"
 msgstr "SKU"
 
-#: src/Admin.php:364
+#: src/Admin.php:356
 msgid "ERP/ID"
 msgstr "ERP/ID"
 
-#: src/Admin.php:369
+#: src/Admin.php:361
 msgid "Dimensions"
 msgstr "Maße"
 
-#: src/Admin.php:374
+#: src/Admin.php:366
 msgid "Weight"
 msgstr "Gewicht"
 
@@ -101,5 +101,5 @@ msgid "netzstrategen"
 msgstr ""
 
 #. Author URI of the plugin/theme
-msgid "https://netzstrategen.com/sind"
+msgid "http://www.netzstrategen.com/sind"
 msgstr ""

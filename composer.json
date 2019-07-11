@@ -1,5 +1,5 @@
 {
-  "name": "local-plugins/price-labels",
+  "name": "netzstrategen/woocommerce-price-labels",
   "type": "wordpress-plugin",
   "authors": [
       {
@@ -8,14 +8,11 @@
           "homepage": "https://netzstrategen.com"
       }
   ],
-  "dist": {
-      "url": "git@github.com:netzstrategen/woocommerce-price-labels.git",
-      "type": "git"
-  },
   "require": {
       "php": ">=7.0.0",
       "composer/installers": "^1",
+      "dompdf/dompdf": "^0.8.3",
       "endroid/qr-code": "^3.5",
-      "dompdf/dompdf": "^0.8.3"
+      "zzzzzzzzzzzzzzzzzzzzzzzzzzzzzzz/no-trailing-comma": "^1.0"
   }
 }

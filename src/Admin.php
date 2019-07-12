@@ -15,12 +15,10 @@ use Endroid\QrCode\QrCode;
 class Admin {
 
   /**
-   * Text for PDF label print button.
+   * Paper size, orientation and font size for the price labels.
    *
-   * @string
+   * @array
    */
-  const PDF_LABEL_PRINT_BUTTON = 'Print Sale PDF label';
-
   const PDF_LABEL_FORMATS = [
     'A5|portrait|12px' => 'A5, portrait',
     'A4|portrait|16px' => 'A4, portrait',
@@ -43,11 +41,10 @@ class Admin {
       static::register_acf();
     }
 
-    // Adds prices label PDF document generation action.
+    // Generates price label PDF document.
     add_action('post_action_label', __CLASS__ . '::post_action_label');
-    // Adds prices label format and print controls to simple product prices section.
+    // Adds price label format and print controls to product price sections.
     add_action('woocommerce_product_options_pricing', __CLASS__ . '::woocommerce_product_options_pricing', 9);
-    // Adds prices label format and print controls to product variation prices section.
     add_action('woocommerce_variation_options_pricing', __CLASS__ . '::woocommerce_variation_options_pricing', 10, 3);
 
     // Adds a configuration section to woocommerce products settings tab.
@@ -65,14 +62,13 @@ class Admin {
     }
     acf_add_local_field_group([
       'key' => 'acf_group_' . Plugin::PREFIX . '_products_attributes',
-      'title' => __('Prices label', Plugin::L10N),
+      'title' => __('Price label', Plugin::L10N),
       'fields' => [
         [
           'key' => 'acf_' . Plugin::PREFIX . '_products_attributes',
           'label' => __('Attributes to print', Plugin::L10N),
           'name' => 'acf_' . Plugin::PREFIX . '_products_attributes',
           'type' => 'select',
-          'instructions' => __('Select the attributes to print in the product prices label.', Plugin::L10N),
           'required' => 0,
           'conditional_logic' => 0,
           'choices' => $products_attributes,
@@ -107,7 +103,7 @@ class Admin {
   }
 
   /**
-   * Adds prices label PDF document generation action.
+   * Generates a price label PDF document.
    *
    * @implements post_action_{$action}
    */
@@ -140,7 +136,7 @@ class Admin {
     }
 
     $data = [
-      'label_logo' => Plugin::getBasePath() . '/templates/images/label-logo.png',
+      'label_logo' => apply_filters(Plugin::PREFIX . '/label/header_image_url', Plugin::getBasePath() . '/templates/images/label-logo.png'),
       'title' => $product->get_title(),
       'price' => wc_price($product->get_price()),
       'regular_price' => wc_price($regular_price),
@@ -149,7 +145,7 @@ class Admin {
       'font_base_size' => $labelFormat[2],
     ];
 
-    $attributes = static::getProductPricesLabelAttributes($product);
+    $attributes = static::getProductPriceLabelAttributes($product);
 
     // Group dimensions LxWxH in a single entry.
     if (!empty($attributes['Tiefe']) && !empty($attributes['Breite']) && !empty($attributes['Höhe'])) {
@@ -167,7 +163,7 @@ class Admin {
   }
 
   /**
-   * Adds prices label format and print controls to simple product prices section.
+   * Adds price label format and print controls to simple product price section.
    *
    * @implements woocommerce_product_options_pricing
    */
@@ -181,12 +177,12 @@ class Admin {
       ],
       get_admin_url() . 'post.php'
     );
-    static::displayPricesLabelFormatsSelect(static::PDF_LABEL_FORMATS, $labelFormatDefault);
-    static::displayPricesLabelPrintButton($link, __(static::PDF_LABEL_PRINT_BUTTON, Plugin::L10N), static::PDF_LABEL_FORMATS);
+    static::displayPriceLabelFormatsSelect(static::PDF_LABEL_FORMATS, $labelFormatDefault);
+    static::displayPriceLabelPrintButton($link, __('Print Sale PDF label', Plugin::L10N), static::PDF_LABEL_FORMATS);
   }
 
   /**
-   * Adds prices label format and print controls to product variation prices section.
+   * Adds price label format and print controls to product variation price section.
    *
    * @implements woocommerce_variation_options_pricing
    */
@@ -200,19 +196,19 @@ class Admin {
       ],
       get_admin_url() . 'post.php'
     );
-    static::displayPricesLabelFormatsSelect(static::PDF_LABEL_FORMATS, $labelFormatDefault);
-    static::displayPricesLabelPrintButton($link, __(static::PDF_LABEL_PRINT_BUTTON, Plugin::L10N), static::PDF_LABEL_FORMATS);
+    static::displayPriceLabelFormatsSelect(static::PDF_LABEL_FORMATS, $labelFormatDefault);
+    static::displayPriceLabelPrintButton($link, __('Print Sale PDF label', Plugin::L10N), static::PDF_LABEL_FORMATS);
   }
 
   /**
-   * Displays a select list with the available prices label formats.
+   * Displays a select list with the available price label formats.
    *
    * @param array $labelFormats
-   *   Available sizes, orientation and font size for the prices label.
+   *   Available sizes, orientation and font size for the price label.
    * @param string $labelFormatDefault
    *   Default label format.
    */
-  public static function displayPricesLabelFormatsSelect($labelFormats, $labelFormatDefault='') {
+  public static function displayPriceLabelFormatsSelect($labelFormats, $labelFormatDefault='') {
     if (empty($labelFormatDefault)) {
       $labelFormatDefault = array_keys($labelFormats)[2];
     }
@@ -228,14 +224,14 @@ class Admin {
   }
 
   /**
-   * Displays the button to print the prices label.
+   * Displays the button to print the price label.
    *
    * @param string $link
    *   URL to trigger the label PDF doc generation.
    * @param string $printLabelButtonText
    *   Text to show in the print label button.
    */
-  public static function displayPricesLabelPrintButton($link, $printLabelButtonText) {
+  public static function displayPriceLabelPrintButton($link, $printLabelButtonText) {
     echo '<a id="' . Plugin::PREFIX . '-button" class="button" href="' . esc_url($link) . '" target="_blank">' . $printLabelButtonText . '</a></p>';
   }
 
@@ -245,7 +241,7 @@ class Admin {
    * @implements woocommerce_get_sections_products
    */
   public static function woocommerce_get_sections_products($sections) {
-    $sections[Plugin::PREFIX] = __('Prices label PDF', Plugin::L10N);
+    $sections[Plugin::PREFIX] = __('Price label', Plugin::L10N);
     return $sections;
   }
 
@@ -259,9 +255,8 @@ class Admin {
       $settings = [
         [
           'id' => Plugin::PREFIX,
-          'name' => __('Price label PDF settings', Plugin::L10N),
+          'name' => __('Price label settings', Plugin::L10N),
           'type' => 'title',
-          'desc' => __('The following options are used to configure the product prices label', Plugin::L10N),
         ],
         [
           'id' => Plugin::PREFIX . '-format',
@@ -279,15 +274,15 @@ class Admin {
   }
 
   /**
-   * Retrieves the attributes to be printed in the product prices label.
+   * Retrieves the attributes to be printed in the product price label.
    *
    * @param WC_Product $product
    *   Product for which attributes should be retrieved.
    *
    * @return array
-   *   List of attributes for the product prices label.
+   *   List of attributes for the product price label.
    */
-  public static function getProductPricesLabelAttributes(\WC_Product $product) {
+  public static function getProductPriceLabelAttributes(\WC_Product $product) {
     $attributes = [];
     $query = [
       'orderby' => 'name',
@@ -314,7 +309,7 @@ class Admin {
   }
 
   /**
-   * Retrieves the attributes to print on the prices label for the given category.
+   * Retrieves the attributes to print on the price label for the given category.
    *
    * Traverses up recursively the product categories list until it finds a
    * a category with assigned product attributes.
@@ -401,7 +396,7 @@ class Admin {
     else {
       $script = '/dist/scripts/main.min.js';
     }
-    wp_enqueue_script(Plugin::PREFIX, Plugin::getBaseUrl() . $script, ['jquery'], Plugin::getGitVersion(), TRUE);
+    wp_enqueue_script(Plugin::PREFIX, Plugin::getBaseUrl() . $script, ['jquery'], FALSE, TRUE);
   }
 
 }

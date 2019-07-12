@@ -47,7 +47,7 @@ class Plugin {
    */
   public static function getBaseUrl() {
     if (!isset(static::$baseUrl)) {
-      static::$baseUrl = plugins_url('', static::getBasePath() . '/custom.php');
+      static::$baseUrl = plugins_url('', static::getBasePath() . '/plugin.php');
     }
     return static::$baseUrl;
   }
@@ -59,29 +59,6 @@ class Plugin {
    */
   public static function getBasePath() {
     return dirname(__DIR__);
-  }
-
-  /**
-   * Generates a version out of the current commit hash.
-   *
-   * @return string
-   */
-   public static function getGitVersion() {
-    $git_version = NULL;
-    if (is_dir(ABSPATH . '.git')) {
-      $ref = trim(file_get_contents(ABSPATH . '.git/HEAD'));
-      if (strpos($ref, 'ref:') === 0) {
-        $ref = substr($ref, 5);
-        if (file_exists(ABSPATH . '.git/' . $ref)) {
-          $ref = trim(file_get_contents(ABSPATH . '.git/' . $ref));
-        }
-        else {
-          $ref = substr($ref, 11);
-        }
-      }
-      $git_version = substr($ref, 0, 8);
-    }
-    return $git_version;
   }
 
   /**

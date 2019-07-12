@@ -1,7 +1,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: woocommerce-price-label\n"
-"POT-Creation-Date: 2019-07-12 08:45+0200\n"
+"POT-Creation-Date: 2019-07-12 10:30+0200\n"
 "PO-Revision-Date: \n"
 "Last-Translator: Joan López <joan@netzstrategen.com>\n"
 "Language-Team: netzstrategen\n"
@@ -47,15 +47,11 @@ msgstr ""
 msgid "SKU"
 msgstr "SKU"
 
-#: src/Admin.php:356
-msgid "ERP/ID"
-msgstr "ERP/ID"
-
-#: src/Admin.php:361
+#: src/Admin.php:357
 msgid "Dimensions"
 msgstr "Maße"
 
-#: src/Admin.php:366
+#: src/Admin.php:362
 msgid "Weight"
 msgstr "Gewicht"
 

@@ -6,7 +6,7 @@
   Text Domain: woocommerce-price-labels
   Description: Generate price label PDFs for WooCommerce products.
   Author: netzstrategen
-  Author URI: http://www.netzstrategen.com/sind
+  Author URI: https://netzstrategen.com/sind
   License: GPL-2.0+
   License URI: http://www.gnu.org/licenses/gpl-2.0
 */

@@ -2,5 +2,8 @@
   "extends": ["eslint:recommended", "google"],
   "rules": {
     "brace-style": ["error", "stroustrup"]
+  },
+  "env": {
+    "es6": true
   }
 }

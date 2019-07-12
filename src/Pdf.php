@@ -18,7 +18,11 @@ class Pdf {
     $dompdf = new Dompdf();
 
     ob_start();
-    Plugin::renderTemplate(['templates/label-' . $orientation . '.php'], $data);
+    $label_template = apply_filters(
+      Plugin::PREFIX . '/label/template',
+      ['templates/label-' . $orientation . '.php']
+    );
+    Plugin::renderTemplate($label_template, $data);
     $html = ob_get_clean();
 
     $dompdf->loadHtml($html);

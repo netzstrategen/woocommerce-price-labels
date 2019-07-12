@@ -8,6 +8,9 @@
           "homepage": "https://netzstrategen.com"
       }
   ],
+  "config": {
+    "sort-packages": true
+  },
   "require": {
       "php": ">=7.0.0",
       "composer/installers": "^1",

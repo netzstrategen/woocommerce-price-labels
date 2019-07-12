@@ -1,6 +1,7 @@
+/* global URL jQuery */
 (function pageLoad($) {
   const $formats = $('#woocommerce-price-labels-format');
-  
+
   // Allows user to select the format of the price label to be printed.
   $formats.change(() => {
     const format = $formats.val();

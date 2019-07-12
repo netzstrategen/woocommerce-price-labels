@@ -1,18 +1,13 @@
 {
   "version": "1.0.0",
   "title": "woocommerce-price-labels",
-  "description": "Generate price label PDFs for WooCommerce products.",
+  "description": "Generates price labels as PDFs for WooCommerce products.",
   "dependencies": {
     "@netzstrategen/gulp-task-collection": "^1.0.3"
   },
   "devDependencies": {
     "eslint": "^4.19.1",
-    "eslint-config-airbnb": "^17.0.0",
-    "eslint-config-prettier": "^2.9.0",
-    "eslint-plugin-import": "^2.13.0",
-    "eslint-plugin-jsx-a11y": "^6.0.3",
-    "eslint-plugin-prettier": "^2.6.2",
-    "eslint-plugin-react": "^7.10.0",
+    "eslint-config-google": "^0.13.0",
     "prettier": "^1.14.0"
   },
   "gulpPaths": {

@@ -291,17 +291,31 @@ class Admin {
     ];
 
     $product_id = $product->get_type() === 'variation' ? $product->get_parent_id() : $product->get_id();
-    $product_categories = wc_get_product_terms($product_id, 'product_cat', $query);
 
-    if ($product_categories) {
-      $category_attributes = static::getAttributesByProductCategoryId($product_categories[0]);
-      foreach ($category_attributes as $category_attribute) {
-        $values = wc_get_product_terms($product_id, 'pa_' . $category_attribute['value'], [
-          'fields' => 'names',
-        ]);
-        if ($values) {
-          $attributes[$category_attribute['label']] = $values[0];
-        }
+    // Get the attributes assigned to the product primary category if it exists.
+    if (class_exists('WPSEO_Primary_Term')) {
+      if ($primary_term_product_id = yoast_get_primary_term_id('product_cat')) {
+        $category_attributes = static::getAttributesByProductCategoryId($primary_term_product_id);
+      };
+    }
+
+    // Find the first product category with assigned attributes and retrieve them.
+    if (!$category_attributes) {
+      $product_categories = wc_get_product_terms($product_id, 'product_cat', $query);
+      foreach ($product_categories as $product_category) {
+        if ($category_attributes = static::getAttributesByProductCategoryId($product_category)) {
+          break;
+        };
+      }
+    }
+
+    // Collect the names of the retrieved product attributes.
+    foreach ($category_attributes as $category_attribute) {
+      $values = wc_get_product_terms($product_id, 'pa_' . $category_attribute['value'], [
+        'fields' => 'names',
+      ]);
+      if ($values) {
+        $attributes[$category_attribute['label']] = $values[0];
       }
     }
 

@@ -293,14 +293,14 @@ class Admin {
     $product_id = $product->get_type() === 'variation' ? $product->get_parent_id() : $product->get_id();
 
     // Get the attributes assigned to the product primary category if it exists.
-    if (class_exists('WPSEO_Primary_Term')) {
+    if (function_exists('yoast_get_primary_term_id')) {
       if ($primary_term_product_id = yoast_get_primary_term_id('product_cat')) {
         $category_attributes = static::getAttributesByProductCategoryId($primary_term_product_id);
       };
     }
 
     // Find the first product category with assigned attributes and retrieve them.
-    if (!$category_attributes) {
+    if (empty($category_attributes)) {
       $product_categories = wc_get_product_terms($product_id, 'product_cat', $query);
       foreach ($product_categories as $product_category) {
         if ($category_attributes = static::getAttributesByProductCategoryId($product_category)) {

@@ -150,7 +150,12 @@ class Admin {
 
     // Add product dimensions.
     if ($dimensions = static::getProductDimensions($product, $attributes)) {
-      $dimensions_label = sprintf(__('Dimensions (L&times;W&times;H) (%s)', 'woocommerce'), get_option('woocommerce_dimension_unit'));
+      if (isset($dimensions['depth'])) {
+        $dimensions_label = sprintf(__('Dimensions (D&times;W&times;H) (%s)', Plugin::L10N), get_option('woocommerce_dimension_unit'));
+      }
+      else {
+        $dimensions_label = sprintf(__('Dimensions (L&times;W&times;H) (%s)', 'woocommerce'), get_option('woocommerce_dimension_unit'));
+      }
       $attributes[$dimensions_label] = wc_format_dimensions($dimensions);
     }
 
@@ -169,10 +174,11 @@ class Admin {
   }
 
   /**
-   * Gets given product dimensions.
+   * Retrieves dimensions for given product.
    *
-   * If product woocommerce standard product dimensions values are not set,
-   * tries to retrieve custom attributes 'Tiefe', 'Breite', 'Höhe'.
+   * If standard product dimensions values of WooCommerce are not set,
+   * attempt to retrieve custom attributes 'Tiefe' (depth), 'Breite' (width),
+   * 'Höhe' (height).
    *
    * @param \WC_Product $product
    *   Product to get the dimensions from.
@@ -182,15 +188,15 @@ class Admin {
    * @return string
    *   Product dimensions.
    */
-  public static function getProductDimensions(\WC_Product $product, array $attributes) :array {
+  public static function getProductDimensions(\WC_Product $product, array $attributes): array {
     $dimensions = $product->get_dimensions(FALSE);
     if (count(array_filter($dimensions))) {
       return $dimensions;
     }
     elseif (!empty($attributes['Tiefe']) && !empty($attributes['Breite']) && !empty($attributes['Höhe'])) {
-      // Group dimensions LxWxH in a single entry.
+      // Group dimensions DxWxH in a single entry.
       return [
-        'length' => $attributes['Tiefe'],
+        'depth' => $attributes['Tiefe'],
         'width' => $attributes['Breite'],
         'height' => $attributes['Höhe'],
       ];

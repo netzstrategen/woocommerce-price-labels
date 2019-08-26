@@ -150,7 +150,8 @@ class Admin {
 
     // Add product dimensions.
     if ($dimensions = static::getProductDimensions($product, $attributes)) {
-      $attributes[sprintf(__('Dimensions (L&times;W&times;H) (%s)', 'woocommerce'), get_option('woocommerce_dimension_unit'))] = wc_format_dimensions($dimensions);
+      $dimensions_label = sprintf(__('Dimensions (L&times;W&times;H) (%s)', 'woocommerce'), get_option('woocommerce_dimension_unit'));
+      $attributes[$dimensions_label] = wc_format_dimensions($dimensions);
     }
 
     // Ensure custom attributes related to product dimensions

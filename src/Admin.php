@@ -314,7 +314,6 @@ class Admin {
       $values = wc_get_product_terms($product_id, 'pa_' . $category_attribute['value'], [
         'fields' => 'names',
       ]);
-
       if ($values) {
         $attributes[$category_attribute['label']] = implode(', ', $values);
       }

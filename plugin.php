@@ -2,7 +2,7 @@
 
 /*
   Plugin Name: WooCommerce Price Labels
-  Version: 1.0.0
+  Version: 1.0.1
   Text Domain: woocommerce-price-labels
   Description: Generates price labels as PDFs for WooCommerce products.
   Author: netzstrategen

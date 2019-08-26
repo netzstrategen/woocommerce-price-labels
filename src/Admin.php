@@ -315,7 +315,7 @@ class Admin {
         'fields' => 'names',
       ]);
       if ($values) {
-        $attributes[$category_attribute['label']] = $values[0];
+        $attributes[$category_attribute['label']] = implode(', ', $values);
       }
     }
 

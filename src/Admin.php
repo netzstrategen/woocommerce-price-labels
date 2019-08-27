@@ -190,7 +190,7 @@ class Admin {
    */
   public static function getProductDimensions(\WC_Product $product, array $attributes): array {
     $dimensions = $product->get_dimensions(FALSE);
-    if (count(array_filter($dimensions))) {
+    if (array_filter($dimensions)) {
       return $dimensions;
     }
     elseif (!empty($attributes['Tiefe']) && !empty($attributes['Breite']) && !empty($attributes['Höhe'])) {

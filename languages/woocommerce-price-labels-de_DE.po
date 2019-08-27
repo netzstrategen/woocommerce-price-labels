@@ -1,7 +1,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: woocommerce-price-label\n"
-"POT-Creation-Date: 2019-07-12 10:30+0200\n"
+"POT-Creation-Date: 2019-08-26 17:06+0200\n"
 "PO-Revision-Date: \n"
 "Last-Translator: Joan López <joan@netzstrategen.com>\n"
 "Language-Team: netzstrategen\n"
@@ -11,47 +11,45 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "X-Generator: Poedit 2.2.3\n"
 
-#: src/Admin.php:68
-msgid "Prices label"
+#: src/Admin.php:66 src/Admin.php:288
+msgid "Price label"
 msgstr ""
 
-#: src/Admin.php:72
+#: src/Admin.php:70
 msgid "Attributes to print"
 msgstr ""
 
-#: src/Admin.php:75
-msgid "Select the attributes to print in the product prices label."
+#: src/Admin.php:154
+#, php-format
+msgid "Dimensions (D&times;W&times;H) (%s)"
+msgstr "Größe (T&times;B&times;H) (%s)"
+
+#: src/Admin.php:157
+#, php-format
+msgid "Dimensions (L&times;W&times;H) (%s)"
+msgstr "Größe (L&times;B&times;H) (%s)"
+
+#: src/Admin.php:225 src/Admin.php:244
+msgid "Print Sale PDF label"
 msgstr ""
 
-#: src/Admin.php:156
-msgid "Dimensions (LWH)"
-msgstr "Maße (LBH)"
-
-#: src/Admin.php:248
-msgid "Prices label PDF"
+#: src/Admin.php:302
+msgid "Price label settings"
 msgstr ""
 
-#: src/Admin.php:262
-msgid "Price label PDF settings"
-msgstr ""
-
-#: src/Admin.php:264
-msgid "The following options are used to configure the product prices label"
-msgstr ""
-
-#: src/Admin.php:268
+#: src/Admin.php:307
 msgid "Default label format"
 msgstr ""
 
-#: src/Admin.php:352
+#: src/Admin.php:405
 msgid "SKU"
 msgstr "SKU"
 
-#: src/Admin.php:357
+#: src/Admin.php:410
 msgid "Dimensions"
 msgstr "Maße"
 
-#: src/Admin.php:362
+#: src/Admin.php:415
 msgid "Weight"
 msgstr "Gewicht"
 
@@ -89,7 +87,7 @@ msgid "WooCommerce Price Labels"
 msgstr ""
 
 #. Description of the plugin/theme
-msgid "Generate price label PDFs for WooCommerce products."
+msgid "Generates price labels as PDFs for WooCommerce products."
 msgstr ""
 
 #. Author of the plugin/theme

@@ -8,6 +8,7 @@
 namespace Netzstrategen\WooCommercePriceLabels;
 
 use Endroid\QrCode\QrCode;
+use WC_Product;
 
 /**
  * Administrative back-end functionality.
@@ -147,19 +148,62 @@ class Admin {
 
     $attributes = static::getProductPriceLabelAttributes($product);
 
-    // Group dimensions LxWxH in a single entry.
-    if (!empty($attributes['Tiefe']) && !empty($attributes['Breite']) && !empty($attributes['Höhe'])) {
-      $attributes[__('Dimensions (LWH)', Plugin::L10N)] = $attributes['Tiefe'] . ' x ' . $attributes['Breite'] . ' x ' . $attributes['Höhe'];
-      unset($attributes['Tiefe']);
-      unset($attributes['Breite']);
-      unset($attributes['Höhe']);
+    // Add product dimensions.
+    if ($dimensions = static::getProductDimensions($product, $attributes)) {
+      if (isset($dimensions['depth'])) {
+        $dimensions_label = sprintf(__('Dimensions (D&times;W&times;H) (%s)', Plugin::L10N), get_option('woocommerce_dimension_unit'));
+      }
+      else {
+        $dimensions_label = sprintf(__('Dimensions (L&times;W&times;H) (%s)', 'woocommerce'), get_option('woocommerce_dimension_unit'));
+      }
+      $attributes[$dimensions_label] = wc_format_dimensions($dimensions);
     }
+
+    // Ensure custom attributes related to product dimensions
+    // are not added to the label.
+    unset($attributes['Tiefe']);
+    unset($attributes['Breite']);
+    unset($attributes['Höhe']);
+
     $data['attributes'] = $attributes;
 
     $qr_code = static::getProductQrCode($post_id, static::QR_CODE_SIZE);
     $data['qr_code'] = 'data:image/png;base64,' . base64_encode($qr_code);
 
     Pdf::render($data, $labelFormat[0], $labelFormat[1]);
+  }
+
+  /**
+   * Retrieves dimensions for given product.
+   *
+   * If standard product dimensions values of WooCommerce are not set,
+   * attempt to retrieve custom attributes 'Tiefe' (depth), 'Breite' (width),
+   * 'Höhe' (height).
+   *
+   * @param \WC_Product $product
+   *   Product to get the dimensions from.
+   * @param array $attributes
+   *   Product attributes.
+   *
+   * @return string
+   *   Product dimensions.
+   */
+  public static function getProductDimensions(\WC_Product $product, array $attributes): array {
+    $dimensions = $product->get_dimensions(FALSE);
+    if (array_filter($dimensions)) {
+      return $dimensions;
+    }
+    elseif (!empty($attributes['Tiefe']) && !empty($attributes['Breite']) && !empty($attributes['Höhe'])) {
+      // Group dimensions DxWxH in a single entry.
+      return [
+        'depth' => $attributes['Tiefe'],
+        'width' => $attributes['Breite'],
+        'height' => $attributes['Höhe'],
+      ];
+    }
+    else {
+      return [];
+    }
   }
 
   /**

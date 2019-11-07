@@ -159,6 +159,13 @@ class Admin {
       $attributes[$dimensions_label] = wc_format_dimensions($dimensions);
     }
 
+    // Add unique product ID.
+    $moeve_ids = static::getMoeveIds($post_id);
+    if (!empty($moeve_ids)) {
+      $product_id_label = __('Art-Nr.:', Plugin::L10N);
+      $attributes[$product_id_label] = join(', ', $moeve_ids);
+    }
+
     // Ensure custom attributes related to product dimensions
     // are not added to the label.
     unset($attributes['Tiefe']);
@@ -172,6 +179,17 @@ class Admin {
 
     Pdf::render($data, $labelFormat[0], $labelFormat[1]);
   }
+
+  /**
+   * Retrieves Moeve IDs for given product.
+   */
+  public static function getMoeveIds($product_id) {
+    global $wpdb;
+    $query = 'SELECT meta_value FROM wp_postmeta WHERE meta_key LIKE %s AND post_id = %d';
+    $query = $wpdb->prepare($query, '_woocommerce-moeve_id_%', $product_id);
+    return array_filter($wpdb->get_col($query));
+  }
+
 
   /**
    * Retrieves dimensions for given product.

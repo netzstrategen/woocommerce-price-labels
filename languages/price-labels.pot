@@ -3,11 +3,11 @@ msgid ""
 msgstr ""
 "Plural-Forms: nplurals=INTEGER; plural=EXPRESSION;\n"
 "Project-Id-Version: woocommerce-price-labels\n"
-"POT-Creation-Date: 2019-08-26 17:06+0200\n"
+"POT-Creation-Date: 2019-11-07 15:37+0100\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Generator: Poedit 2.2.3\n"
+"X-Generator: Poedit 2.2.4\n"
 "X-Poedit-Basepath: ..\n"
 "X-Poedit-Flags-xgettext: --add-comments=translators:\n"
 "X-Poedit-WPHeader: plugin.php\n"
@@ -22,7 +22,7 @@ msgstr ""
 "X-Poedit-SearchPathExcluded-0: *.min.js\n"
 "X-Poedit-SearchPathExcluded-1: vendor\n"
 
-#: src/Admin.php:66 src/Admin.php:288
+#: src/Admin.php:66 src/Admin.php:306
 msgid "Price label"
 msgstr ""
 
@@ -40,27 +40,31 @@ msgstr ""
 msgid "Dimensions (L&times;W&times;H) (%s)"
 msgstr ""
 
-#: src/Admin.php:225 src/Admin.php:244
+#: src/Admin.php:165
+msgid "SKU:"
+msgstr ""
+
+#: src/Admin.php:243 src/Admin.php:262
 msgid "Print Sale PDF label"
 msgstr ""
 
-#: src/Admin.php:302
+#: src/Admin.php:320
 msgid "Price label settings"
 msgstr ""
 
-#: src/Admin.php:307
+#: src/Admin.php:325
 msgid "Default label format"
 msgstr ""
 
-#: src/Admin.php:405
+#: src/Admin.php:423
 msgid "SKU"
 msgstr ""
 
-#: src/Admin.php:410
+#: src/Admin.php:428
 msgid "Dimensions"
 msgstr ""
 
-#: src/Admin.php:415
+#: src/Admin.php:433
 msgid "Weight"
 msgstr ""
 

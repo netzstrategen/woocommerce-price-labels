@@ -1,7 +1,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: woocommerce-price-label\n"
-"POT-Creation-Date: 2019-08-26 17:06+0200\n"
+"POT-Creation-Date: 2019-11-07 15:37+0100\n"
 "PO-Revision-Date: \n"
 "Last-Translator: Joan López <joan@netzstrategen.com>\n"
 "Language-Team: netzstrategen\n"
@@ -9,9 +9,9 @@ msgstr ""
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Generator: Poedit 2.2.3\n"
+"X-Generator: Poedit 2.2.4\n"
 
-#: src/Admin.php:66 src/Admin.php:288
+#: src/Admin.php:66 src/Admin.php:306
 msgid "Price label"
 msgstr ""
 
@@ -29,27 +29,31 @@ msgstr "Größe (T&times;B&times;H) (%s)"
 msgid "Dimensions (L&times;W&times;H) (%s)"
 msgstr "Größe (L&times;B&times;H) (%s)"
 
-#: src/Admin.php:225 src/Admin.php:244
+#: src/Admin.php:165
+msgid "SKU:"
+msgstr "Art.-Nr.:"
+
+#: src/Admin.php:243 src/Admin.php:262
 msgid "Print Sale PDF label"
 msgstr ""
 
-#: src/Admin.php:302
+#: src/Admin.php:320
 msgid "Price label settings"
 msgstr ""
 
-#: src/Admin.php:307
+#: src/Admin.php:325
 msgid "Default label format"
 msgstr ""
 
-#: src/Admin.php:405
+#: src/Admin.php:423
 msgid "SKU"
 msgstr "SKU"
 
-#: src/Admin.php:410
+#: src/Admin.php:428
 msgid "Dimensions"
 msgstr "Maße"
 
-#: src/Admin.php:415
+#: src/Admin.php:433
 msgid "Weight"
 msgstr "Gewicht"
 

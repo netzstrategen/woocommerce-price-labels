@@ -162,7 +162,7 @@ class Admin {
     // Add unique product ID.
     $moeve_ids = static::getMoeveIds($post_id);
     if (!empty($moeve_ids)) {
-      $product_id_label = __('Art-Nr.:', Plugin::L10N);
+      $product_id_label = __('SKU:', Plugin::L10N);
       $attributes[$product_id_label] = join(', ', $moeve_ids);
     }
 

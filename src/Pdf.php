@@ -20,7 +20,7 @@ class Pdf {
     ob_start();
     $label_template = apply_filters(
       Plugin::PREFIX . '/label/template',
-      ['templates/label-' . $orientation . '.php']
+      ['templates/label.php']
     );
     Plugin::renderTemplate($label_template, $data);
     $html = ob_get_clean();

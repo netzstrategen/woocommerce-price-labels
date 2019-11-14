@@ -32,7 +32,8 @@ class Admin {
    *
    * @integer
    */
-  const QR_CODE_SIZE = 400;
+  const QR_CODE_SIZE_PORTRAIT = 400;
+  const QR_CODE_SIZE_LANDSCAPE = 600;
 
   /**
    * @implements admin_init
@@ -137,6 +138,7 @@ class Admin {
     }
 
     $data = [
+      'orientation' => $labelFormat[1],
       'label_logo' => apply_filters(Plugin::PREFIX . '/label/header_image_url', Plugin::getBasePath() . '/templates/images/label-logo.png'),
       'title' => $product->get_title(),
       'price' => wc_price($product->get_price()),
@@ -174,10 +176,13 @@ class Admin {
 
     $data['attributes'] = $attributes;
 
-    $qr_code = static::getProductQrCode($post_id, static::QR_CODE_SIZE);
+    $qr_code_size = $labelFormat[1] === 'landscape' ? self::QR_CODE_SIZE_LANDSCAPE : self::QR_CODE_SIZE_PORTRAIT;
+    $qr_code = static::getProductQrCode($post_id, $qr_code_size);
+
     $data['qr_code'] = 'data:image/png;base64,' . base64_encode($qr_code);
 
     Pdf::render($data, $labelFormat[0], $labelFormat[1]);
+
   }
 
   /**

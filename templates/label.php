@@ -40,11 +40,11 @@ $is_portrait = isset($orientation) && $orientation === 'portrait';
         <?php endif; ?>
         <div class="prices__regular">
           <h2><?= __('Instead of', Plugin::L10N) ?></h2>
-          <p class="prices__amount"><?= $regular_price ?></p>
+          <p class="prices__amount"><?= $formatted_regular_price ?></p>
         </div>
         <div class="prices__sale">
           <h2><?= __('Now', Plugin::L10N) ?></h2>
-          <p class="prices__amount"><?= $sale_price ?></p>
+          <p class="prices__amount"><?= $formatted_sale_price ?></p>
         </div>
       </div>
       <div class="details">

@@ -28,6 +28,13 @@ class Admin {
   ];
 
   /**
+   * Price suffix, instead of ',00'.
+   *
+   * @string
+   */
+  const PRICE_SUFFIX = ',-';
+
+  /**
    * Size of QR code to include in the PDF label document.
    *
    * @integer
@@ -138,12 +145,12 @@ class Admin {
     }
 
     $formatted_regular_price = wc_price($regular_price, ['price_format' => '%1$s&nbsp;%2$s']);
-    // Replace ",00" with ",-".
-    $formatted_regular_price = preg_replace('@,00@', ',–', $formatted_regular_price);
+    // Replace ",00".
+    $formatted_regular_price = preg_replace('@,00@', static::PRICE_SUFFIX, $formatted_regular_price);
 
     $formatted_sale_price = wc_price($sale_price, ['price_format' => '%1$s&nbsp;%2$s']);
-    // Replace ",00" with ",-".
-    $formatted_sale_price = preg_replace('@,00@', ',–', $formatted_sale_price);
+    // Replace ",00".
+    $formatted_sale_price = preg_replace('@,00@', static::PRICE_SUFFIX, $formatted_sale_price);
 
     $data = [
       'orientation' => $labelFormat[1],

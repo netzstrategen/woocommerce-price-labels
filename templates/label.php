@@ -47,10 +47,8 @@ $is_portrait = isset($orientation) && $orientation === 'portrait';
           <p class="prices__amount"><?= $formatted_sale_price ?></p>
         </div>
       </div>
+      <h2 class="product-name"><?= $title ?></h2>
       <div class="details">
-        <?php if ($is_portrait): ?>
-          <h2><?= $title ?></h2>
-        <?php endif; ?>
         <?php if ($attributes): ?>
           <table class="attributes">
             <?php foreach ($attributes as $label => $value): ?>

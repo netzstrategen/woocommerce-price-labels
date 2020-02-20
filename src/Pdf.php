@@ -14,7 +14,20 @@ use Dompdf\Dompdf;
  */
 class Pdf {
 
-  public static function render($data, $size = 'A4', $orientation = 'portrait') {
+  /**
+   * Returns a rendered PDF document based on a HTML template.
+   *
+   * @param array $data
+   *   Data to be included in the PDF document.
+   * @param string $size
+   *   DIN size of the document.
+   * @param string $orientation
+   *   Orientation (portrait, landscape) of the document.
+   *
+   * @return string
+   *   The rendered PDF document.
+   */
+  public static function render(array $data, $size = 'A4', $orientation = 'portrait') {
     $dompdf = new Dompdf();
 
     ob_start();
@@ -28,9 +41,9 @@ class Pdf {
     $dompdf->loadHtml($html);
     $dompdf->setPaper($size, $orientation);
     $dompdf->render();
-    $dompdf->stream();
 
-    exit;
+    $dompdf->stream();
+    die();
   }
 
 }

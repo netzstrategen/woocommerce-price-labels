@@ -7,8 +7,6 @@
 
 namespace Netzstrategen\WooCommercePriceLabels;
 
-use WC_Product;
-
 /**
  * Administrative back-end functionality.
  */
@@ -30,10 +28,7 @@ class Admin {
     add_action('woocommerce_product_options_pricing', __CLASS__ . '::woocommerce_product_options_pricing', 9);
     add_action('woocommerce_variation_options_pricing', __CLASS__ . '::woocommerce_variation_options_pricing', 10, 3);
 
-    // Generates price label PDF document.
-    add_action('post_action_label', __NAMESPACE__ . '\Label::post_action_label');
-
-    // Enqueues plugin scripts.
+    // Enqueues backend plugin scripts.
     add_filter('admin_enqueue_scripts', __CLASS__ . '::admin_enqueue_scripts');
   }
 
@@ -111,7 +106,7 @@ class Admin {
           'id' => Plugin::PREFIX . '-format',
           'name' => __('Default label format', Plugin::L10N),
           'type' => 'select',
-          'options' => static::PDF_LABEL_FORMATS,
+          'options' => Label::PDF_LABEL_FORMATS,
         ],
         [
           'type' => 'sectionend',
@@ -129,23 +124,23 @@ class Admin {
    */
   public static function woocommerce_product_options_pricing() {
     $product_id = get_the_ID();
-    $labelFormatDefault = get_option(Plugin::PREFIX . '-format');
-    Label::addProductPriceLabelControls($product_id, $labelFormatDefault);
+    $label_format_default = get_option(Plugin::PREFIX . '-format');
+    Label::addProductPriceLabelControls($product_id, $label_format_default);
   }
 
   /**
-   * Adds price label format and print controls to product variation price section.
+   * Adds price label print controls to product variation price section.
    *
    * @implements woocommerce_variation_options_pricing
    */
   public static function woocommerce_variation_options_pricing($loop, $variation_data, $variation) {
     $product_id = $variation->ID;
-    $labelFormatDefault = get_option(Plugin::PREFIX . '-format');
-    Label::addProductPriceLabelControls($product_id, $labelFormatDefault);
+    $label_format_default = get_option(Plugin::PREFIX . '-format');
+    Label::addProductPriceLabelControls($product_id, $label_format_default);
   }
 
   /**
-   * Enqueues plugin scripts.
+   * Enqueues backend plugin scripts.
    *
    * @implements wp_enqueue_scripts
    */
@@ -154,14 +149,17 @@ class Admin {
       return;
     }
 
-    if (defined('SCRIPT_DEBUG') && SCRIPT_DEBUG) {
-      $script = '/assets/scripts/main.js';
-    }
-    else {
-      $script = '/dist/scripts/main.min.js';
-    }
+    $baseDir = Plugin::getScriptsBaseDir();
+    $suffix = Plugin::getScriptsMinSuffix();
 
-    wp_enqueue_script(Plugin::PREFIX, Plugin::getBaseUrl() . $script, ['jquery'], FALSE, TRUE);
+    // Enqueues scripts.
+    wp_enqueue_script(
+      Plugin::PREFIX,
+      Plugin::getBaseUrl() . $baseDir . '/scripts/main' . $suffix . '.js',
+      ['jquery'],
+      FALSE,
+      TRUE
+    );
   }
 
 }

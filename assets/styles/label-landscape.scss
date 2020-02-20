@@ -1,7 +1,7 @@
 * {
+  box-sizing: border-box;
   margin: 0;
   padding: 0;
-  box-sizing: border-box;
   font-family: Arial, Helvetica Neue, Helvetica, sans-serif;
 }
 
@@ -45,8 +45,8 @@ th {
 }
 
 .prices:after {
-  content: " ";
   display: table;
+  content: ' ';
   clear: both;
 }
 
@@ -86,8 +86,8 @@ th {
 
 .prices__regular h2,
 .prices__regular p {
-  font-weight: normal;
   margin-right: 3rem;
+  font-weight: normal;
 }
 
 .prices__sale,
@@ -133,9 +133,10 @@ th {
 }
 
 .details {
-  margin-bottom: 1rem;
-  width: 70%;
   float: left;
+  width: 70%;
+  margin-bottom: 1rem;
+  padding-left: 3rem;
 }
 
 .product-name {
@@ -151,13 +152,9 @@ th {
   font-size: 0.8em;
 }
 
-.details {
-  padding-left: 3rem;
-}
-
 .qr-code {
-  width: 27%;
   float: right;
+  width: 27%;
   padding-top: 0.7rem;
   padding-right: 3rem;
 }
@@ -172,8 +169,8 @@ table.attributes tr {
 }
 
 .qr-code:after {
-  content: ' ';
   display: table;
+  content: ' ';
   clear: both;
 }
 

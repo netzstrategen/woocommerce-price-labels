@@ -7,6 +7,7 @@
 
 namespace Netzstrategen\WooCommercePriceLabels;
 
+use WC_Product;
 use Endroid\QrCode\QrCode;
 
 /**
@@ -35,11 +36,61 @@ class Label {
   const QR_CODE_SIZE_LANDSCAPE = 600;
 
   /**
+   * Adds print price label capability to given roles.
+   *
+   * @param array $roles
+   *   List of role names to add price label printing capability to.
+   */
+  public static function addPrintPriceLabelCapability(array $roles) {
+    foreach ($roles as $role) {
+      get_role($role)->add_cap('print_price_label', TRUE);
+    }
+  }
+
+  /**
+   * Removes print price label capability from given roles.
+   *
+   * @param array $roles
+   *   List of role names to remove price label printing capability from.
+   */
+  public static function removePrintPriceLabelCapability(array $roles) {
+    foreach ($roles as $role) {
+      get_role($role)->remove_cap('print_price_label', TRUE);
+    }
+  }
+
+  /**
+   * Returns the list of roles allowed to print price labels.
+   *
+   * @return array
+   *   Roles that can print products price labels.
+   */
+  public static function getRolesCanPrintPriceLabel() {
+    return defined('ROLES_CAN_PRINT_PRICE_LABEL') && ROLES_CAN_PRINT_PRICE_LABEL ? ROLES_CAN_PRINT_PRICE_LABEL : ['sale-editor'];
+  }
+
+  /**
+   * Adds price label printing controls to product summary.
+   *
+   * @implements woocommerce_single_product_summary
+   * @implements woocommerce_single_variation
+   */
+  public static function addPrintPriceLabelControls() {
+    $product_id = get_the_ID();
+    $label_format_default = get_option(Plugin::PREFIX . '-format');
+    Label::addProductPriceLabelControls($product_id, $label_format_default);
+  }
+
+  /**
    * Generates a price label PDF document.
    *
    * @implements post_action_{$action}
    */
   public static function post_action_label($post_id) {
+    if (!current_user_can('print_price_label')) {
+      return;
+    }
+
     $product = wc_get_product($post_id);
 
     $regular_price = $product->get_regular_price();
@@ -52,10 +103,10 @@ class Label {
     }
 
     if (isset($_GET['format'])) {
-      $labelFormat = explode('|', $_GET['format']);
+      $label_format = explode('|', $_GET['format']);
     }
     else {
-      $labelFormat = explode('|', get_option(Plugin::PREFIX . '-format', array_keys(static::PDF_LABEL_FORMATS)[0]));
+      $label_format = explode('|', get_option(Plugin::PREFIX . '-format', array_keys(static::PDF_LABEL_FORMATS)[0]));
     }
 
     $regular_price = $product->get_regular_price();
@@ -75,14 +126,14 @@ class Label {
     $formatted_sale_price = preg_replace('@,00@', $price_suffix, $formatted_sale_price);
 
     $data = [
-      'orientation' => $labelFormat[1],
+      'orientation' => $label_format[1],
       'label_logo' => apply_filters(Plugin::PREFIX . '/label/header_image_url', Plugin::getBasePath() . '/templates/images/label-logo.png'),
       'title' => $product->get_title(),
       'price' => wc_price($product->get_price()),
       'formatted_regular_price' => $formatted_regular_price,
       'formatted_sale_price' => $formatted_sale_price,
       'discount_percentage' => $discount_percentage,
-      'font_base_size' => $labelFormat[2],
+      'font_base_size' => $label_format[2],
     ];
 
     $attributes = static::getProductPriceLabelAttributes($product);
@@ -102,7 +153,7 @@ class Label {
     $moeve_ids = static::getMoeveIds($post_id);
     if (!empty($moeve_ids)) {
       $product_id_label = __('SKU:', Plugin::L10N);
-      $attributes[$product_id_label] = join(', ', $moeve_ids);
+      $attributes[$product_id_label] = implode(', ', $moeve_ids);
     }
 
     // Ensure custom attributes related to product dimensions
@@ -113,62 +164,51 @@ class Label {
 
     $data['attributes'] = $attributes;
 
-    $qr_code_size = $labelFormat[1] === 'landscape' ? self::QR_CODE_SIZE_LANDSCAPE : self::QR_CODE_SIZE_PORTRAIT;
+    $qr_code_size = $label_format[1] === 'landscape' ? self::QR_CODE_SIZE_LANDSCAPE : self::QR_CODE_SIZE_PORTRAIT;
     $qr_code = static::getProductQrCode($post_id, $qr_code_size);
 
     $data['qr_code'] = 'data:image/png;base64,' . base64_encode($qr_code);
 
-    Pdf::render($data, $labelFormat[0], $labelFormat[1]);
-
+    return Pdf::render($data, $label_format[0], $label_format[1]);
   }
 
   /**
-   * Adds Adds price label printing controls to a given product.
+   * Adds price label printing controls to a given product.
    *
    * @param int $product_id
    *   The product unique identifier.
-   * @param string $labelFormatDefault
+   * @param string $label_format_default
    *   The default format for the price label.
    * @param bool $enabled
    *   If TRUE the controls are enabled.
    */
-  public static function addProductPriceLabelControls($product_id, $labelFormatDefault, $enabled = TRUE) {
-    $link = add_query_arg(
-      [
-        'post' => $product_id,
-        'action' => 'label',
-        'format' => $labelFormatDefault,
-      ],
-      get_admin_url() . 'post.php'
-    );
-    Label::displayPriceLabelFormatsSelect(Label::PDF_LABEL_FORMATS, $labelFormatDefault, $enabled);
-    Label::displayPriceLabelPrintButton($product_id, $link, __('Print Sale PDF label', Plugin::L10N), $enabled);
+  public static function addProductPriceLabelControls($product_id, $label_format_default = '', $enabled = TRUE) {
+    Label::displayPriceLabelFormatsSelect(Label::PDF_LABEL_FORMATS, $label_format_default, $enabled);
+    Label::displayPriceLabelPrintButton($product_id, __('Print Sale PDF label', Plugin::L10N), $enabled);
   }
 
   /**
    * Displays a select list with the available price label formats.
    *
-   * @param array $labelFormats
+   * @param array $label_formats
    *   Available sizes, orientation and font size for the price label.
-   * @param string $labelFormatDefault
+   * @param string $label_format_default
    *   Default label format.
    */
-  public static function displayPriceLabelFormatsSelect(array $labelFormats, $labelFormatDefault = '') {
-    if (empty($labelFormatDefault)) {
-      $labelFormatDefault = array_keys($labelFormats)[2];
+  public static function displayPriceLabelFormatsSelect(array $label_formats, $label_format_default = '') {
+    if (empty($label_format_default)) {
+      $label_format_default = array_keys($label_formats)[0];
     }
-    $selected = ' selected="selected"';
     ?>
-    <p class="form-field price_label_print">
+    <p class="form-field price-label-print">
       <select
-        id="<?= Plugin::PREFIX ?>-format"
         class="<?= Plugin::PREFIX ?>-format"
         style="margin-right: 8px;"
       >
-      <?php foreach ($labelFormats as $key => $format): ?>
+      <?php foreach ($label_formats as $key => $format): ?>
         <option
           value="<?= $key ?>"
-          <?= $key === $labelFormatDefault ? $selected : '' ?>>
+          <?= selected($key, $label_format_default, FALSE) ?>>
           <?= $format ?>
         </option>
       <?php endforeach; ?>
@@ -179,19 +219,22 @@ class Label {
   /**
    * Displays the button to print the price label.
    *
-   * @param string $link
-   *   URL to trigger the label PDF doc generation.
+   * @param int $product_id
+   *   Product unique identifier.
    * @param string $printLabelButtonText
    *   Text to show in the print label button.
-   * @param bool $enabled
-   *   If TRUE the button is enabled.
    */
-  public static function displayPriceLabelPrintButton($product_id, $link, $printLabelButtonText) {
+  public static function displayPriceLabelPrintButton($product_id, $printLabelButtonText) {
+    $args = [
+      'post' => $product_id,
+      'action' => 'label',
+      'format' => get_option(Plugin::PREFIX . '-format', array_keys(static::PDF_LABEL_FORMATS)[0]),
+    ];
+    $link = add_query_arg($args, get_admin_url() . 'post.php');
     ?>
-      <a id="<?= Plugin::PREFIX ?>-button"
+      <a
+        href="<?= $link ?>"
         class="button <?= Plugin::PREFIX ?>-button"
-        href="<?= esc_url($link) ?>"
-        data-product-id="<?= $product_id ?>"
         target="_blank"
       >
       <?= $printLabelButtonText ?>
@@ -200,14 +243,13 @@ class Label {
     <?php
   }
 
-
   /**
    * Retrieves Moeve IDs for given product.
    *
    * @param int $product_id
    *   Product unique identifier.
    *
-   * @return string
+   * @return array
    *   Moeve IDs for given product.
    */
   public static function getMoeveIds($product_id) {
@@ -232,7 +274,7 @@ class Label {
    * @return string
    *   Product dimensions.
    */
-  public static function getProductDimensions(\WC_Product $product, array $attributes): array {
+  public static function getProductDimensions(WC_Product $product, array $attributes): array {
     $dimensions = $product->get_dimensions(FALSE);
     if (array_filter($dimensions)) {
       return $dimensions;
@@ -253,13 +295,13 @@ class Label {
   /**
    * Retrieves the attributes to be printed in the product price label.
    *
-   * @param WC_Product $product
+   * @param \WC_Product $product
    *   Product for which attributes should be retrieved.
    *
    * @return array
    *   List of attributes for the product price label.
    */
-  public static function getProductPriceLabelAttributes(\WC_Product $product) {
+  public static function getProductPriceLabelAttributes(WC_Product $product) {
     $attributes = [];
     $query = [
       'orderby' => 'name',
@@ -276,7 +318,8 @@ class Label {
       };
     }
 
-    // Find the first product category with assigned attributes and retrieve them.
+    // Find the first product category with assigned attributes and retrieve
+    // them.
     if (empty($category_attributes)) {
       $product_categories = wc_get_product_terms($product_id, 'product_cat', $query);
       foreach ($product_categories as $product_category) {
@@ -300,7 +343,7 @@ class Label {
   }
 
   /**
-   * Retrieves the attributes to print on the price label for the given category.
+   * Retrieves attributes to print on the price label for the given category.
    *
    * Traverses up recursively the product categories list until it finds a
    * a category with assigned product attributes.
@@ -324,13 +367,13 @@ class Label {
   /**
    * Retrieves basic data (SKU, dimensions and weight) for a given product.
    *
-   * @param WC_Product $product
+   * @param \WC_Product $product
    *   Product for which data has to be retrieved.
    *
    * @return array
    *   Set of product data including weight, dimensions and SKU.
    */
-  public static function getProductData(\WC_Product $product) {
+  public static function getProductData(WC_Product $product) {
     $product_data = [];
 
     // Adds sku to the cart item data.

@@ -27,6 +27,8 @@ class Plugin {
   const L10N = self::PREFIX;
 
   /**
+   * Plugin base URL.
+   *
    * @var string
    */
   private static $baseUrl;
@@ -35,13 +37,80 @@ class Plugin {
    * @implements init
    */
   public static function init() {
+    // Ensure user is allowed to print the price labels.
+    if (!current_user_can('print_price_label')) {
+      return;
+    }
+
+    // Adds price label printing controls to product summary.
+    add_action('woocommerce_simple_add_to_cart', __NAMESPACE__ . '\Label::addPrintPriceLabelControls');
+    add_action('woocommerce_single_variation', __NAMESPACE__ . '\Label::addPrintPriceLabelControls');
+
+    // Prints product price label PDF document.
+    add_action('post_action_label', __NAMESPACE__ . '\Label::post_action_label');
+
+    // Schedule the cleanup of expired products price labels.
+    add_action(Plugin::PREFIX . '_delete_old_price_labels', __NAMESPACE__ . '\Label::deleteOldPriceLabels');
+
     if (is_admin()) {
       return;
+    }
+
+    // Enqueues frontend plugin scripts and styles.
+    add_action('wp_enqueue_scripts', __CLASS__ . '::wp_enqueue_scripts');
+  }
+
+  /**
+   * Enqueues frontend plugin scripts and styles.
+   *
+   * @implements wp_enqueue_scripts
+   */
+  public static function wp_enqueue_scripts() {
+    if (function_exists('is_product') && is_product()) {
+      $git_version = static::getGitVersion();
+      $baseDir = static::getScriptsBaseDir();
+      $suffix = static::getScriptsMinSuffix();
+
+      // Enqueues scripts.
+      wp_enqueue_script(
+        Plugin::PREFIX,
+        static::getBaseUrl() . $baseDir . '/scripts/main' . $suffix . '.js',
+        ['jquery'],
+        $git_version,
+        TRUE
+      );
+
+      // Enqueues styles.
+      wp_enqueue_style(
+        Plugin::PREFIX,
+        static::getBaseUrl() . '/dist/styles/main.min.css',
+        [],
+        $git_version
+      );
     }
   }
 
   /**
-   * The base URL path to this plugin's folder.
+   * Returns the scripts base dir.
+   *
+   * @return string
+   *   Scripts base dir.
+   */
+  public static function getScriptsBaseDir() {
+    return defined('SCRIPT_DEBUG') && SCRIPT_DEBUG ? '/assets' : '/dist';
+  }
+
+  /**
+   * Returns suffix for minified scripts.
+   *
+   * @return string
+   *   Minified scripts suffix.
+   */
+  public static function getScriptsMinSuffix() {
+    return defined('SCRIPT_DEBUG') && SCRIPT_DEBUG ? '' : '.min';
+  }
+
+  /**
    *
    * Uses plugins_url() instead of plugin_dir_url() to avoid a trailing slash.
    */
@@ -53,9 +122,10 @@ class Plugin {
   }
 
   /**
-   * The absolute filesystem base path of this plugin.
+   * Retrieves the absolute filesystem base path of this plugin.
    *
    * @return string
+   *   Filesystem base path of this plugin.
    */
   public static function getBasePath() {
     return dirname(__DIR__);
@@ -93,6 +163,30 @@ class Plugin {
       }
       throw new \InvalidArgumentException("Missing template '$template_pathname'");
     }
+  }
+
+  /**
+   * Generates a version out of the current commit hash.
+   *
+   * @return string
+   *   Current commit hash.
+   */
+  public static function getGitVersion() {
+    $git_version = NULL;
+    if (is_dir(ABSPATH . '.git')) {
+      $ref = trim(file_get_contents(ABSPATH . '.git/HEAD'));
+      if (strpos($ref, 'ref:') === 0) {
+        $ref = substr($ref, 5);
+        if (file_exists(ABSPATH . '.git/' . $ref)) {
+          $ref = trim(file_get_contents(ABSPATH . '.git/' . $ref));
+        }
+        else {
+          $ref = substr($ref, 11);
+        }
+      }
+      $git_version = substr($ref, 0, 8);
+    }
+    return $git_version;
   }
 
   /**

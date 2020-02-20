@@ -1,0 +1,15 @@
+.product__summary {
+  .price-label-print {
+    display: flex;
+    height: 45px;
+  }
+
+  .woocommerce-price-labels-format {
+    width: 50%;
+    height: 45px;
+  }
+
+  .button.button.woocommerce-price-labels-button {
+    margin-top: 0;
+  }
+}

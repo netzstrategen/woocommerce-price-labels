@@ -88,12 +88,14 @@ class Label {
    *
    * @implements post_action_{$action}
    */
-  public static function post_action_label($post_id) {
-    if (!current_user_can('print_price_label')) {
+  public static function post_action_label($post_id = 0) {
+    // Removes the capability 'edit_posts' from role 'sale-editor' to prevent
+    // unauthorised access to the site backend.
+    get_role('sale-editor')->remove_cap('edit_posts', TRUE);
+
+    if (!current_user_can('print_price_label') || !$post_id || !$product = wc_get_product($post_id)) {
       return;
     }
-
-    $product = wc_get_product($post_id);
 
     $regular_price = $product->get_regular_price();
     $sale_price = $product->get_sale_price() ?: $regular_price;

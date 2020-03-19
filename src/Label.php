@@ -66,7 +66,9 @@ class Label {
    *   Roles that can print products price labels.
    */
   public static function getRolesCanPrintPriceLabel() {
-    return defined('ROLES_CAN_PRINT_PRICE_LABEL') && ROLES_CAN_PRINT_PRICE_LABEL ? ROLES_CAN_PRINT_PRICE_LABEL : ['sale-editor'];
+    return defined('ROLES_CAN_PRINT_PRICE_LABEL') && ROLES_CAN_PRINT_PRICE_LABEL ?
+      ROLES_CAN_PRINT_PRICE_LABEL :
+      ['sale-editor', 'administrator'];
   }
 
   /**

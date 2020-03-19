@@ -2,7 +2,7 @@
 
 /*
   Plugin Name: WooCommerce Price Labels
-  Version: 1.2.1
+  Version: 1.2.2
   Text Domain: woocommerce-price-labels
   Description: Generates price labels as PDFs for WooCommerce products.
   Author: netzstrategen
@@ -39,3 +39,12 @@ register_uninstall_hook(__FILE__, __NAMESPACE__ . '\Schema::uninstall');
 add_action('plugins_loaded', __NAMESPACE__ . '\Plugin::loadTextdomain');
 add_action('init', __NAMESPACE__ . '\Plugin::init', 20);
 add_action('admin_init', __NAMESPACE__ . '\Admin::init');
+
+// Capability 'edit-posts' is required to trigger the custom action to print
+// products price labels. It is temporarily added to the 'sale-editor' role,
+// but it will be removed as soon as the label is to be printed, to prevent
+// unauthorised access to the site backend.
+$action = $_GET['action'] ?? '';
+if ($action === 'label') {
+  get_role('sale-editor')->add_cap('edit_posts', TRUE);
+}

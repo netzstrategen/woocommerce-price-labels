@@ -11,8 +11,8 @@ h2 {
 
 h1 {
   padding-bottom: 0.5rem;
-  margin-top: 1.5rem;
-  font-size: 2.5rem;
+  margin-top: 1rem;
+  font-size: 2rem;
   text-transform: uppercase;
   text-align: center;
 }
@@ -135,7 +135,8 @@ th {
 .qr-code__image {
   float: left;
   display: block;
-  width: 6rem;
+  width: auto;
+  height: 5rem;
   margin-top: -0.35em;
   margin-left: -0.35em;
 }

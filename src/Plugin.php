@@ -166,6 +166,29 @@ class Plugin {
   }
 
   /**
+   * Encodes an image as a Base64 string.
+   *
+   * @param string $image_path
+   *   Absolute path to the image file.
+   *
+   * @return string
+   *   Base64 encoded image.
+   */
+  public static function imageToBase64($image_path) {
+    $type = pathinfo($image_path, PATHINFO_EXTENSION);
+    $data = file_get_contents($image_path);
+    $base64 ='';
+
+    if ($type == 'svg') {
+      $base64 = 'data:image/svg+xml;base64,' . base64_encode($data);
+    }
+    else {
+      $base64 = 'data:image/'. $type .';base64,' . base64_encode($data);
+    }
+    return $base64;
+  }
+
+  /**
    * Generates a version out of the current commit hash.
    *
    * @return string

@@ -1,5 +1,5 @@
 {
-  "version": "1.2.3",
+  "version": "1.2.4",
   "title": "woocommerce-price-labels",
   "description": "Generates price labels as PDFs for WooCommerce products.",
   "dependencies": {

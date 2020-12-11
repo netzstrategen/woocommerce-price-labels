@@ -62,8 +62,8 @@ namespace Netzstrategen\WooCommercePriceLabels;
         <p class="discount__value">-<?= $discount_percentage ?>%</p>
       </div>
       <div class="prices__sale">
-        <p class="prices__amount price--current"><?= $sale_price ?> <span class="price__currency"><?= $currency_symbol ?></span></p>
-        <p class="prices__amount price--regular"><?= __('Instead of', Plugin::L10N) ?>: <?= $regular_price  ?> <span class="price__currency"><?= $currency_symbol ?></span></p>
+        <p class="prices__amount price--current"><?= $formatted_sale_price ?> <span class="price__currency"><?= $currency_symbol ?></span></p>
+        <p class="prices__amount price--regular"><?= __('Instead of', Plugin::L10N) ?>: <?= $formatted_regular_price  ?> <span class="price__currency"><?= $currency_symbol ?></span></p>
       </div>
     </div>
     <div class="footer">

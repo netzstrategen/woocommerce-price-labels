@@ -123,10 +123,10 @@ class Label {
     }
 
     $price_suffix = ',-';
-    $formatted_regular_price = wc_price($regular_price, ['price_format' => '%1$s&nbsp;%2$s']);
+    $formatted_regular_price = wc_price($regular_price, ['price_format' => '%2$s']);
     // Replace ",00" with ",-".
     $formatted_regular_price = preg_replace('@,00@', $price_suffix, $formatted_regular_price);
-    $formatted_sale_price = wc_price($sale_price, ['price_format' => '%1$s&nbsp;%2$s']);
+    $formatted_sale_price = wc_price($sale_price, ['price_format' => '%2$s']);
     $formatted_sale_price = preg_replace('@,00@', $price_suffix, $formatted_sale_price);
     $label_logo = apply_filters(
       Plugin::PREFIX . '/label/header_image_path',

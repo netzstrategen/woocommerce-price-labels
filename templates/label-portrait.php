@@ -12,7 +12,6 @@ namespace Netzstrategen\WooCommercePriceLabels;
       width: 100%;
       font-size: <?= $font_base_size ?>;
     }
-
     @font-face {
       font-family: HelveticaNeueCondensedBold;
       src: local('Helvetica Neue Condensed Bold'), local('HelveticaNeue-CondensedBold');

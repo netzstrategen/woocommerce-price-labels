@@ -13,7 +13,6 @@
       width: 100%;
       font-size: <?= $font_base_size ?>;
     }
-
     <?php
       include Plugin::getBasePath() . '/dist/styles/label.min.css';
       include Plugin::getBasePath() . '/dist/styles/label-landscape.min.css';

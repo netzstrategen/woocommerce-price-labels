@@ -22,7 +22,7 @@ class Label {
    */
   const PDF_LABEL_FORMATS = [
     'A5|portrait|12px' => 'A5, portrait',
-    'A4|portrait|16px' => 'A4, portrait',
+    'A4|portrait|15px' => 'A4, portrait',
     'A3|portrait|24px' => 'A3, portrait',
     'A3|landscape|24px' => 'A3, landscape',
   ];
@@ -123,10 +123,10 @@ class Label {
     }
 
     $price_suffix = ',-';
-    $formatted_regular_price = wc_price($regular_price, ['price_format' => '%1$s&nbsp;%2$s']);
+    $formatted_regular_price = wc_price($regular_price, ['price_format' => '%2$s']);
     // Replace ",00" with ",-".
     $formatted_regular_price = preg_replace('@,00@', $price_suffix, $formatted_regular_price);
-    $formatted_sale_price = wc_price($sale_price, ['price_format' => '%1$s&nbsp;%2$s']);
+    $formatted_sale_price = wc_price($sale_price, ['price_format' => '%2$s']);
     $formatted_sale_price = preg_replace('@,00@', $price_suffix, $formatted_sale_price);
     $label_logo = apply_filters(
       Plugin::PREFIX . '/label/header_image_path',
@@ -138,9 +138,12 @@ class Label {
       'label_logo' => Plugin::imageToBase64($label_logo),
       'title' => $product->get_title(),
       'price' => wc_price($product->get_price()),
+      'regular_price' => preg_replace( '/[^0-9.,]/', '', wc_price($regular_price)),
       'formatted_regular_price' => $formatted_regular_price,
       'formatted_sale_price' => $formatted_sale_price,
+      'sale_price' => preg_replace( '/[^0-9.,]/', '', wc_price($sale_price)),
       'discount_percentage' => $discount_percentage,
+      'currency_symbol' => get_woocommerce_currency_symbol(),
       'font_base_size' => $label_format[2],
     ];
 

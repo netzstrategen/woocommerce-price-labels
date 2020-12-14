@@ -1,0 +1,153 @@
+* {
+  box-sizing: border-box;
+  padding: 0;
+  margin: 0;
+  font-family:
+    HelveticaNeue,
+    Helvetica Neue,
+    TeXGyreHerosCnBold,
+    Helvetica,
+    Tahoma,
+    Geneva,
+    Arial Narrow,
+    Arial,
+    sans-serif;
+}
+
+h1,
+h2 {
+  font-weight: regular;
+}
+
+h2 {
+  font-size: 3rem;
+}
+
+th {
+  text-align: left;
+}
+
+.label-logo img {
+  width: 100%;
+  height: auto;
+}
+
+.label__title {
+  margin: 1rem 0;
+}
+
+.container {
+  margin: 0 1.5rem;
+}
+
+.prices__discount,
+.discount__title,
+.discount__value,
+.price--current,
+.price--current .price__currency {
+  font-family: HelveticaNeueCondensedBlack, Helvetica, Arial, sans-serif;
+  font-weight: bolder;
+}
+
+.price--regular,
+.price--regular .price__currency {
+  font-family: HelveticaNeueCondensedBold, Helvetica, Arial, sans-serif;
+  font-stretch: condensed;
+  font-weight: bold;
+}
+
+.prices {
+  width: 100%;
+  margin: 1rem 0;
+}
+
+.prices:after {
+  height: 0;
+  content: '';
+  clear: both;
+}
+
+.prices__discount {
+  float: left;
+  width: 25%;
+}
+
+.discount__title {
+  padding: 0;
+  margin: 0 0 1rem 0;
+  font-size: 2.25rem;
+  color: #d12d37;
+  text-align: center;
+}
+
+.discount__value {
+  margin: 0 auto;
+  text-align: center;
+  color: white;
+  background: #d12d37;
+}
+
+.prices__sale {
+  float: right;
+  width: 72%;
+  margin-right: 4rem;
+  text-align: right;
+
+  .price--current {
+    color: #d12d37;
+  }
+
+  .price--regular {
+    font-size: 2rem;
+  }
+}
+
+.details {
+  margin-bottom: 1rem 0;
+}
+
+.product-name {
+  margin-bottom: 1rem;
+  text-align: center;
+  font-size: 1.5rem;
+  font-weight: bold;
+}
+
+.details,
+.qr-code {
+  font-size: 0.9em;
+}
+
+.attribute__label {
+  padding-right: 1rem;
+  font-weight: bold;
+}
+
+.qr-code:after {
+  height: 0;
+  content: '';
+  clear: both;
+}
+
+.qr-code__image {
+  float: left;
+  display: block;
+  width: auto;
+  height: 5rem;
+}
+
+.qr-code__help {
+  margin-left: 9rem;
+  font-weight: bold;
+}
+
+.footer {
+  position: fixed;
+  right: 1rem;
+  bottom: 2rem;
+  left: 1rem;
+  padding: 0.25rem;
+  border-top: 1px black solid;
+  font-size: 0.8rem;
+  text-align: center;
+}

@@ -8,6 +8,7 @@
 namespace Netzstrategen\WooCommercePriceLabels;
 
 use Dompdf\Dompdf;
+use Dompdf\Options;
 
 /**
  * Pdf document rendering.
@@ -33,13 +34,21 @@ class Pdf {
     ob_start();
     $label_template = apply_filters(
       Plugin::PREFIX . '/label/template',
-      ['templates/label.php']
+      ['templates/label-' . $orientation .'.php']
     );
     Plugin::renderTemplate($label_template, $data);
     $html = ob_get_clean();
 
+    // Save the resulting HTML for debugging purposes.
+    if (defined('WP_DEBUG') && WP_DEBUG === TRUE) {
+      file_put_contents(WP_CONTENT_DIR . '/uploads/price-label-' . $orientation . '.html', $html);
+    }
+
     $dompdf->loadHtml($html);
     $dompdf->setPaper($size, $orientation);
+
+    $dompdf->getOptions()->setIsFontSubsettingEnabled(TRUE);
+    $dompdf->getOptions()->setDefaultMediaType('all');
     $dompdf->render();
 
     $dompdf->stream();

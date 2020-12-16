@@ -10,6 +10,10 @@
     "eslint-config-google": "^0.13.0",
     "prettier": "^1.14.0"
   },
+  "scripts": {
+    "watch": "gulp --concat=false",
+    "build": "gulp build:production --concat=false"
+  },
   "gulpPaths": {
     "destDir": "./dist",
     "fonts": {

@@ -32,6 +32,7 @@
       </div>
     </div>
     <div class="details">
+      <h2 class="product-name"><?= $title ?></h2>
       <?php if ($attributes): ?>
         <table class="attributes">
           <?php foreach ($attributes as $label => $value): ?>

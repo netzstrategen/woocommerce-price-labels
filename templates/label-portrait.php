@@ -35,7 +35,7 @@ namespace Netzstrategen\WooCommercePriceLabels;
     <img src="<?= $label_logo ?>" />
   </div>
   <div class="container">
-    <h1 class="label__title"><?= __('Exhibit', Plugin::L10N); ?></h1>
+    <h1 class="label__title A<?= $_GET['format'][1]; ?>"><?= __('Exhibit', Plugin::L10N); ?></h1>
     <h2 class="product-name"><?= $title ?></h2>
     <div class="details">
       <?php if ($attributes): ?>

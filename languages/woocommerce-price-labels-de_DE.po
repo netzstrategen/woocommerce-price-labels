@@ -71,7 +71,7 @@ msgstr "statt"
 
 #: templates/label-landscape.php:51 templates/label-portrait.php:44
 msgid "Scan this QR code for more Infos directly in our online shop."
-msgstr "Hier gehts’ direkt zum Artikel in unserem Onlineshop."
+msgstr "Hier geht’s direkt zum Artikel in unserem Onlineshop."
 
 #: templates/label-landscape.php:55 templates/label-portrait.php:58
 msgid ""

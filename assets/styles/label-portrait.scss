@@ -1,10 +1,19 @@
 .label__title {
   padding-bottom: 0.5rem;
   border-bottom: 1px #000 solid;
-  margin: 0.5rem 0;
+  margin: 0.4rem 0;
   font-size: 2rem;
   text-transform: uppercase;
   text-align: center;
+
+  &.A5,
+  &.A3 {
+    font-size: 3.8rem;
+  }
+
+  &.A4 {
+    font-size: 4.4rem;
+  }
 }
 
 .discount__value {

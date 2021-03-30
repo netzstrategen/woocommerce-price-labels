@@ -107,7 +107,7 @@ th {
 }
 
 .product-name {
-  margin-bottom: 1rem;
+  margin-bottom: 0.9rem;
   text-align: center;
   font-size: 1.5rem;
   font-weight: bold;
@@ -118,7 +118,12 @@ th {
   font-size: 0.9em;
 }
 
+.attributes {
+  width: 100%;
+}
+
 .attribute__label {
+  width: 25%;
   padding-right: 1rem;
   font-weight: bold;
 }

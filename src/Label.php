@@ -21,6 +21,7 @@ class Label {
    * @array
    */
   const PDF_LABEL_FORMATS = [
+    'A6|portrait|8px' => 'A6, portrait',
     'A5|portrait|12px' => 'A5, portrait',
     'A4|portrait|15px' => 'A4, portrait',
     'A3|portrait|24px' => 'A3, portrait',

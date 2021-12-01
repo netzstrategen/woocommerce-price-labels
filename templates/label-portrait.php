@@ -30,7 +30,7 @@ namespace Netzstrategen\WooCommercePriceLabels;
     ?>
   </style>
 </head>
-<body>
+<body class="A<?= esc_attr($_GET['format'][1]) ?>-body-wrapper">
   <div class="label-logo">
     <img src="<?= $label_logo ?>" />
   </div>

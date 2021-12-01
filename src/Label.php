@@ -22,9 +22,9 @@ class Label {
    */
   const PDF_LABEL_FORMATS = [
     'A6|portrait|8px' => 'A6, portrait',
-    'A5|portrait|12px' => 'A5, portrait',
+    'A5|portrait|11px' => 'A5, portrait',
     'A4|portrait|15px' => 'A4, portrait',
-    'A3|portrait|24px' => 'A3, portrait',
+    'A3|portrait|22px' => 'A3, portrait',
     'A3|landscape|24px' => 'A3, landscape',
   ];
 
@@ -325,7 +325,7 @@ class Label {
 
     // Get the attributes assigned to the product primary category if it exists.
     if (function_exists('yoast_get_primary_term_id')) {
-      if ($primary_term_product_id = yoast_get_primary_term_id('product_cat')) {
+      if ($primary_term_product_id = yoast_get_primary_term_id('product_cat', $product_id)) {
         $category_attributes = static::getAttributesByProductCategoryId($primary_term_product_id);
       };
     }

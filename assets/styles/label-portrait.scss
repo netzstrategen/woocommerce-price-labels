@@ -5,19 +5,6 @@
   font-size: 2rem;
   text-transform: uppercase;
   text-align: center;
-
-  &.A6 {
-    font-size: 3.9rem;
-  }
-
-  &.A5,
-  &.A3 {
-    font-size: 3.8rem;
-  }
-
-  &.A4 {
-    font-size: 4.4rem;
-  }
 }
 
 .discount__value {
@@ -34,4 +21,44 @@
 
 .woocommerce-Price-currencySymbol {
   font-size: 0.5em;
+}
+
+.A6-body-wrapper {
+  .label__title {
+    font-size: 3.9rem;
+  }
+
+  .attribute__label {
+    width: 33%;
+  }
+
+  .prices__sale .price--current {
+    font-size: 3rem;
+  }
+
+  .discount__value {
+    width: 5.6rem;
+    height: 5.6rem;
+    border-radius: 2.8rem;
+    font-size: 1.8rem;
+    line-height: 4rem;
+  }
+}
+
+.A5-body-wrapper {
+  .label__title {
+    font-size: 3.8rem;
+  }
+}
+
+.A4-body-wrapper {
+  .label__title {
+    font-size: 4.4rem;
+  }
+}
+
+.A3-body-wrapper {
+  .label__title {
+    font-size: 3.8rem;
+  }
 }

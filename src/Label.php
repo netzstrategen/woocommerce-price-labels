@@ -134,7 +134,16 @@ class Label {
       Plugin::getBasePath() . '/templates/images/label-logo.png'
     );
 
+    // Number of chars per row for each attribute
+    $max_row_chars = [
+      'A6' => 70,
+      'A5' => 80,
+      'A4' => 85,
+      'A3' => 150,
+    ];
+
     $data = [
+      'paper_size' => $label_format[0],
       'orientation' => $label_format[1],
       'label_logo' => Plugin::imageToBase64($label_logo),
       'title' => $product->get_title(),
@@ -146,6 +155,7 @@ class Label {
       'discount_percentage' => $discount_percentage,
       'currency_symbol' => get_woocommerce_currency_symbol(),
       'font_base_size' => $label_format[2],
+      'max_row_chars' => $max_row_chars[$label_format[0]] ?? NULL,
     ];
 
     $attributes = static::getProductPriceLabelAttributes($product);

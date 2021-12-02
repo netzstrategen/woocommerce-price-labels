@@ -30,20 +30,21 @@ namespace Netzstrategen\WooCommercePriceLabels;
     ?>
   </style>
 </head>
-<body class="A<?= esc_attr($_GET['format'][1]) ?>-body-wrapper">
+<body class="<?= $paper_size ?>-body-wrapper">
   <div class="label-logo">
     <img src="<?= $label_logo ?>" />
   </div>
   <div class="container">
-    <h1 class="label__title A<?= esc_attr($_GET['format'][1]) ?>"><?= __('Exhibit', Plugin::L10N); ?></h1>
+    <h1 class="label__title <?= $paper_size ?>"><?= __('Exhibit', Plugin::L10N); ?></h1>
     <h2 class="product-name"><?= $title ?></h2>
     <div class="details">
       <?php if ($attributes): ?>
         <table class="attributes">
           <?php foreach ($attributes as $label => $value): ?>
+          <?php $value = 'automatische Höhenverstellung, automatische Liegeflächenverstellung, Drehfunktion, manuelle Armteilverstellung'?>
           <tr>
             <td class="attribute__label"><?= $label ?></td>
-            <td class="attribute__value"><?= $value ?></td>
+            <td class="attribute__value"><?= $max_row_chars && strlen($value)>$max_row_chars ? sprintf('%s...', substr($value, 0, $max_row_chars)) : $value ?></td>
           </tr>
           <?php endforeach; ?>
         </table>

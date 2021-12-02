@@ -1,18 +1,14 @@
 /* global URL jQuery */
 
 (function pageLoad($) {
+  // set the default label selected from the beginning
+  setPrintButtonLink();
   const $printLabelControls = $('.price-label-print');
 
   // Sets the price label print format.
   // Allows user to select the format of the price label to be printed.
   $('body').on('change', '.woocommerce-price-labels-format', (event) => {
-    const $this = $(event.target);
-    const $printButton = $this.siblings('.woocommerce-price-labels-button');
-    const format = $this.val();
-    const url = new URL($printButton.attr('href'));
-
-    url.searchParams.set('format', format);
-    $printButton.attr('href', url);
+    setPrintButtonLink();
   });
 
   // Shows the price label controls when a variation is selected.
@@ -31,4 +27,17 @@
   $('.single_variation_wrap').on('hide_variation', (event) => {
     $printLabelControls.hide();
   });
+
+  /**
+   * Set the link according to the selected label format.
+   */
+  function setPrintButtonLink() {
+    const $select = $('.woocommerce-price-labels-format');
+    const $printButton = $select.siblings('.woocommerce-price-labels-button');
+    const format = $select.val();
+    const url = new URL($printButton.attr('href'));
+
+    url.searchParams.set('format', format);
+    $printButton.attr('href', url);
+  }
 }(jQuery));

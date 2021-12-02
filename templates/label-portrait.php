@@ -41,7 +41,6 @@ namespace Netzstrategen\WooCommercePriceLabels;
       <?php if ($attributes): ?>
         <table class="attributes">
           <?php foreach ($attributes as $label => $value): ?>
-          <?php $value = 'automatische Höhenverstellung, automatische Liegeflächenverstellung, Drehfunktion, manuelle Armteilverstellung'?>
           <tr>
             <td class="attribute__label"><?= $label ?></td>
             <td class="attribute__value"><?= $max_row_chars && strlen($value)>$max_row_chars ? sprintf('%s...', substr($value, 0, $max_row_chars)) : $value ?></td>

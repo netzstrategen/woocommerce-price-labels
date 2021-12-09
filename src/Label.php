@@ -21,9 +21,10 @@ class Label {
    * @array
    */
   const PDF_LABEL_FORMATS = [
-    'A5|portrait|12px' => 'A5, portrait',
+    'A6|portrait|8px' => 'A6, portrait',
+    'A5|portrait|11px' => 'A5, portrait',
     'A4|portrait|15px' => 'A4, portrait',
-    'A3|portrait|24px' => 'A3, portrait',
+    'A3|portrait|22px' => 'A3, portrait',
     'A3|landscape|24px' => 'A3, landscape',
   ];
 
@@ -133,7 +134,16 @@ class Label {
       Plugin::getBasePath() . '/templates/images/label-logo.png'
     );
 
+    // Number of chars per row for each attribute
+    $max_row_chars = [
+      'A6' => 70,
+      'A5' => 80,
+      'A4' => 85,
+      'A3' => 150,
+    ];
+
     $data = [
+      'paper_size' => $label_format[0],
       'orientation' => $label_format[1],
       'label_logo' => Plugin::imageToBase64($label_logo),
       'title' => $product->get_title(),
@@ -145,6 +155,7 @@ class Label {
       'discount_percentage' => $discount_percentage,
       'currency_symbol' => get_woocommerce_currency_symbol(),
       'font_base_size' => $label_format[2],
+      'max_row_chars' => $max_row_chars[$label_format[0]] ?? NULL,
     ];
 
     $attributes = static::getProductPriceLabelAttributes($product);
@@ -324,7 +335,7 @@ class Label {
 
     // Get the attributes assigned to the product primary category if it exists.
     if (function_exists('yoast_get_primary_term_id')) {
-      if ($primary_term_product_id = yoast_get_primary_term_id('product_cat')) {
+      if ($primary_term_product_id = yoast_get_primary_term_id('product_cat', $product_id)) {
         $category_attributes = static::getAttributesByProductCategoryId($primary_term_product_id);
       };
     }

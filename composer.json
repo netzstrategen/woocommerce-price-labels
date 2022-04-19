@@ -14,7 +14,7 @@
   "require": {
     "php": ">=7.0.0",
     "composer/installers": "^1",
-    "dompdf/dompdf": "^1.2.1",
+    "dompdf/dompdf": "1.0.0",
     "endroid/qr-code": "^3.5",
     "zzzzzzzzzzzzzzzzzzzzzzzzzzzzzzz/no-trailing-comma": "^1.0"
   }

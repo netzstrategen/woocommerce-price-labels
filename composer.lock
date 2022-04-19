@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "39ec1998f727b05dbd7395cbc8e11471",
+    "content-hash": "37634d783a2af9d5b45fef930da3701d",
     "packages": [
         {
             "name": "bacon/bacon-qr-code",
@@ -248,23 +248,23 @@
         },
         {
             "name": "dompdf/dompdf",
-            "version": "v1.2.1",
+            "version": "v1.0.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/dompdf/dompdf.git",
-                "reference": "c6dfd9bb8b0040609f04754f729d4cb3016e0575"
+                "reference": "e53da1ccea4340832d0b864e383c4e2b2d141ca3"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/dompdf/dompdf/zipball/c6dfd9bb8b0040609f04754f729d4cb3016e0575",
-                "reference": "c6dfd9bb8b0040609f04754f729d4cb3016e0575",
+                "url": "https://api.github.com/repos/dompdf/dompdf/zipball/e53da1ccea4340832d0b864e383c4e2b2d141ca3",
+                "reference": "e53da1ccea4340832d0b864e383c4e2b2d141ca3",
                 "shasum": ""
             },
             "require": {
                 "ext-dom": "*",
                 "ext-mbstring": "*",
-                "phenx/php-font-lib": "^0.5.4",
-                "phenx/php-svg-lib": "^0.3.3 || ^0.4.0",
+                "phenx/php-font-lib": "^0.5.2",
+                "phenx/php-svg-lib": "^0.3.3",
                 "php": "^7.1 || ^8.0"
             },
             "require-dev": {
@@ -279,6 +279,11 @@
                 "ext-zlib": "Needed for pdf stream compression"
             },
             "type": "library",
+            "extra": {
+                "branch-alias": {
+                    "dev-develop": "0.7-dev"
+                }
+            },
             "autoload": {
                 "psr-4": {
                     "Dompdf\\": "src/"
@@ -307,7 +312,7 @@
             ],
             "description": "DOMPDF is a CSS 2.1 compliant HTML to PDF converter",
             "homepage": "https://github.com/dompdf/dompdf",
-            "time": "2022-03-24T12:57:42+00:00"
+            "time": "2020-12-24T19:58:01+00:00"
         },
         {
             "name": "endroid/qr-code",

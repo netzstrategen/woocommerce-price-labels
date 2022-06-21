@@ -75,11 +75,15 @@ msgstr "Hier geht’s direkt zum Artikel in unserem Onlineshop."
 
 #: templates/label-landscape.php:55 templates/label-portrait.php:58
 msgid ""
-"These are collection prices in EUR incl. VAT. Shipping possible against "
-"surcharge. Errors without prior sale reserve."
+"These are collection prices in EUR incl. VAT."
 msgstr ""
-"Dies sind Abholpreise in EUR inkl. MwSt. Versand möglich gegen Aufpreis. "
-"Irrtum und Zwischenverkauf vorbehalten."
+"Dies sind Abholpreise in EUR inkl. MwSt."
+
+#: templates/label-landscape.php:55 templates/label-portrait.php:58
+msgid ""
+"Shipping possible against surcharge. Errors without prior sale reserve."
+msgstr ""
+"Versand möglich gegen Aufpreis. Irrtum und Zwischenverkauf vorbehalten."
 
 #. Plugin Name of the plugin/theme
 msgid "WooCommerce Price Labels"

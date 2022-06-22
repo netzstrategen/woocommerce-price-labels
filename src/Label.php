@@ -366,7 +366,7 @@ class Label {
   }
 
   /**
-   * Retrieves codition for using short description instead of attributes to print on the price label for the given category.
+   * Retrieves attributes to print on the price label for the given category.
    *
    * Traverses up recursively the product categories list until it finds a
    * a category with assigned product attributes.

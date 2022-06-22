@@ -57,6 +57,15 @@ class Admin {
           'return_format' => 'array',
           'placeholder' => '',
         ],
+        [
+          'key' => 'acf_' . Plugin::PREFIX . '_use_product_short_description',
+          'label' => __('Use product short description instead', Plugin::L10N),
+          'name' => 'acf_' . Plugin::PREFIX . '_use_product_short_description',
+          'type' => 'true_false',
+          'required' => 0,
+          'conditional_logic' => 0,
+          'ui' => 1
+        ],
       ],
       'location' => [
         [

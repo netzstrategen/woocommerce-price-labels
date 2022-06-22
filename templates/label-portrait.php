@@ -45,7 +45,11 @@ namespace Netzstrategen\WooCommercePriceLabels;
     </div>
     <div class="details">
       <?php
-      if ($attributes) : ?>
+      if (!empty($short_description)) : ?>
+        <div class="short-description">
+          <?= $short_description ?>
+        </div>
+      <?php elseif ($attributes) : ?>
         <table class="attributes">
           <?php foreach ($attributes as $label => $value) : ?>
           <tr>
@@ -55,6 +59,7 @@ namespace Netzstrategen\WooCommercePriceLabels;
           <?php endforeach; ?>
         </table>
       <?php endif; ?>
+      
       <div class="qr-code">
         <p class="qr-code__help">
           <?= __('Alles info:', Plugin::L10N) ?>

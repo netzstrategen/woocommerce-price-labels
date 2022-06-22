@@ -190,6 +190,7 @@ class Label {
     $qr_code = static::getProductQrCode($post_id, $qr_code_size);
 
     $data['qr_code'] = 'data:image/png;base64,' . base64_encode($qr_code);
+    $data['short_description'] = static::getProductShortDescription($product);
 
     return Pdf::render($data, $label_format[0], $label_format[1]);
   }
@@ -365,7 +366,7 @@ class Label {
   }
 
   /**
-   * Retrieves attributes to print on the price label for the given category.
+   * Retrieves codition for using short description instead of attributes to print on the price label for the given category.
    *
    * Traverses up recursively the product categories list until it finds a
    * a category with assigned product attributes.
@@ -384,6 +385,48 @@ class Label {
     };
 
     return $attributes;
+  }
+
+  /**
+   * Retrieves the short description if "Use product short description instead" field is selected.
+   *
+   * @param \WC_Product $product
+   *   Product for which short description should be retrieved.
+   *
+   * @return string
+   *   Short description if field is selected.
+   */
+  public static function getProductShortDescription(WC_Product $product) {
+    $short_description = '';
+    $use_short_description = NULL;
+
+    $product_id = $product->get_type() === 'variation' ? $product->get_parent_id() : $product->get_id();
+
+    // Get the attributes assigned to the product primary category if it exists.
+    if (function_exists('yoast_get_primary_term_id')) {
+      if ($primary_term_product_id = yoast_get_primary_term_id('product_cat', $product_id)) {
+        $use_short_description = static::checkUseShortDescription($primary_term_product_id);
+      };
+    }
+
+    if ($use_short_description) {
+      $short_description = $product->get_short_description();
+    }
+
+    return $short_description;
+  }
+
+  /**
+   * Checks "use short description" field for the given category.
+   *
+   * @param int $category_id
+   *   Unique category identifier.
+   *
+   * @return bool
+   *   Use short description insted of attributes.
+   */
+  public static function checkUseShortDescription($category_id) {
+    return get_field('acf_' . Plugin::PREFIX . '_use_product_short_description', 'product_cat_' . $category_id);
   }
 
   /**

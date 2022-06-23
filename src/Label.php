@@ -387,7 +387,7 @@ class Label {
   }
 
   /**
-   * Retrieves the short description if "Use product short description instead" field is selected.
+   * Retrieves the short description conditionally.
    *
    * @param \WC_Product $product
    *   Product for which short description should be retrieved.

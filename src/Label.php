@@ -184,14 +184,13 @@ class Label {
     unset($attributes['Breite']);
     unset($attributes['Höhe']);
 
+    $data['short_description'] = static::getProductShortDescription($product);
     $data['attributes'] = $attributes;
 
     $qr_code_size = $label_format[1] === 'landscape' ? self::QR_CODE_SIZE_LANDSCAPE : self::QR_CODE_SIZE_PORTRAIT;
     $qr_code = static::getProductQrCode($post_id, $qr_code_size);
 
     $data['qr_code'] = 'data:image/png;base64,' . base64_encode($qr_code);
-    $data['short_description'] = static::getProductShortDescription($product);
-
     return Pdf::render($data, $label_format[0], $label_format[1]);
   }
 
@@ -410,7 +409,7 @@ class Label {
     }
 
     if ($use_short_description) {
-      $short_description = $product->get_short_description();
+      $short_description = $product->get_type() === 'variation' ? $product->get_description() : $product->get_short_description();
     }
 
     return $short_description;

@@ -409,7 +409,13 @@ class Label {
     }
 
     if ($use_short_description) {
-      $short_description = $product->get_type() === 'variation' ? $product->get_description() : $product->get_short_description();
+      if ($product->get_type() === 'variation') {
+        $parent_product = wc_get_product($product->get_parent_id());
+        $short_description = $parent_product->get_short_description();
+      }
+      else {
+        $short_description = $product->get_short_description();
+      }
     }
 
     return $short_description;

@@ -88,6 +88,9 @@ th {
 .short-description {
   float: left;
   width: 75%;
+  ul {
+    padding-left: 1em;
+  }
 }
 
 .attributes {

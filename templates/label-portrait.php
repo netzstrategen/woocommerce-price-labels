@@ -45,7 +45,10 @@ namespace Netzstrategen\WooCommercePriceLabels;
     </div>
     <div class="details">
       <?php
-      if (!empty($short_description)) : ?>
+      if (!empty($short_description)) :
+        if ($max_short_description_length && strlen($short_description) > $max_short_description_length) {
+          $short_description = substr($short_description, 0, $max_short_description_length) . '[...]';
+        } ?>
         <div class="short-description">
           <?= $short_description ?>
         </div>

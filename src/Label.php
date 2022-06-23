@@ -142,6 +142,13 @@ class Label {
       'A3' => 150,
     ];
 
+    $max_short_description_length = [
+      'A6' => 210,
+      'A5' => 350,
+      'A4' => 370,
+      'A3' => 390,
+    ];
+
     $data = [
       'paper_size' => $label_format[0],
       'orientation' => $label_format[1],
@@ -156,6 +163,7 @@ class Label {
       'currency_symbol' => get_woocommerce_currency_symbol(),
       'font_base_size' => $label_format[2],
       'max_row_chars' => $max_row_chars[$label_format[0]] ?? NULL,
+      'max_short_description_length' => $max_short_description_length[$label_format[0]] ?? NULL,
     ];
 
     $attributes = static::getProductPriceLabelAttributes($product);
@@ -191,6 +199,7 @@ class Label {
     $qr_code = static::getProductQrCode($post_id, $qr_code_size);
 
     $data['qr_code'] = 'data:image/png;base64,' . base64_encode($qr_code);
+
     return Pdf::render($data, $label_format[0], $label_format[1]);
   }
 
@@ -415,6 +424,12 @@ class Label {
       }
       else {
         $short_description = $product->get_short_description();
+      }
+
+      if (!empty(($short_description))) {
+        $short_description = str_replace('</li>', ', ', $short_description);
+        $short_description = trim(strip_tags($short_description, '</li>'));
+        $short_description = rtrim($short_description, ', ');
       }
     }
 

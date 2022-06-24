@@ -15,6 +15,45 @@
   font-size: 0.5em;
 }
 
+
+.A7-body-wrapper {
+  .label__title {
+    font-size: 3.7rem;
+  }
+
+  .attribute__label {
+    width: 33%;
+  }
+
+  .prices__sale .price--current {
+    font-size: 7rem;
+  }
+
+  .prices__sale .price--regular {
+    font-size: 3rem;
+  }
+
+  .prices__sale .price__label {
+    font-size: 1.5rem;
+  }
+
+ .details {
+    font-size: 1.1rem;
+  }
+
+  .attribute__label {
+    padding-right: 3rem;
+  }
+
+  .qr-code__image {
+    height: 6.5rem;
+  }
+  
+  .footer {
+    font-size: 1.1rem;
+  }
+}
+
 .A6-body-wrapper {
   .label__title {
     font-size: 3.9rem;

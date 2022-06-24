@@ -50,7 +50,17 @@ namespace Netzstrategen\WooCommercePriceLabels;
           $short_description = substr($short_description, 0, $max_short_description_length) . '[...]';
         } ?>
         <div class="short-description">
-          <?= $short_description ?>
+          <?php if ($attributes && isset($attributes['Art.-Nr.:'])) : ?>
+            <table class="attributes">
+              <tr>
+                <td class="attribute__label"><?= 'Art.-Nr.:'; ?></td>
+                <td class="attribute__value"><?= $max_row_chars && strlen($attributes['Art.-Nr.:']) > $max_row_chars ? sprintf('%s...', substr($attributes['Art.-Nr.:'], 0, $max_row_chars)) : $attributes['Art.-Nr.:'] ?></td>
+              </tr>
+            </table>
+          <?php endif; ?>
+          <p>
+            <?= $short_description ?>
+          </p>
         </div>
       <?php elseif ($attributes) : ?>
         <table class="attributes">
@@ -65,7 +75,7 @@ namespace Netzstrategen\WooCommercePriceLabels;
       
       <div class="qr-code">
         <p class="qr-code__help">
-          <?= __('Alles info:', Plugin::L10N) ?>
+          <?= __('Alle infos:', Plugin::L10N) ?>
         </p>
         <img class="qr-code__image" src="<?= $qr_code ?>" />
       </div>

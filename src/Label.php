@@ -21,10 +21,10 @@ class Label {
    * @array
    */
   const PDF_LABEL_FORMATS = [
+    'A7|portrait|6px' => 'A7, portrait',
     'A6|portrait|8px' => 'A6, portrait',
     'A5|portrait|11px' => 'A5, portrait',
     'A4|portrait|15px' => 'A4, portrait',
-    'A3|portrait|22px' => 'A3, portrait',
     'A3|landscape|24px' => 'A3, landscape',
   ];
 
@@ -136,17 +136,20 @@ class Label {
 
     // Number of chars per row for each attribute
     $max_row_chars = [
+      'A7' => 70,
       'A6' => 70,
       'A5' => 80,
       'A4' => 85,
       'A3' => 150,
     ];
 
+    // Number of chars for short description.
     $max_short_description_length = [
+      'A7' => 210,
       'A6' => 210,
-      'A5' => 350,
-      'A4' => 370,
-      'A3' => 390,
+      'A5' => 280,
+      'A4' => 300,
+      'A3' => 340,
     ];
 
     $data = [

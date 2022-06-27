@@ -1,5 +1,4 @@
 .label__title {
-  padding-bottom: 0.5rem;
   border-bottom: 1px #000 solid;
   margin: 0.4rem 0;
   font-size: 2rem;
@@ -15,7 +14,6 @@
   font-size: 0.5em;
 }
 
-
 .A7-body-wrapper {
   .label__title {
     font-size: 3.7rem;
@@ -23,6 +21,7 @@
 
   .attribute__label {
     width: 33%;
+    padding-right: 3rem;
   }
 
   .prices__sale .price--current {
@@ -37,19 +36,16 @@
     font-size: 1.5rem;
   }
 
- .details {
-    font-size: 1.1rem;
-  }
-
-  .attribute__label {
-    padding-right: 3rem;
+  .details {
+    font-size: 1.4rem;
   }
 
   .qr-code__image {
-    height: 6.5rem;
+    height: 7rem;
   }
-  
+
   .footer {
+    position: static;
     font-size: 1.1rem;
   }
 }
@@ -61,6 +57,37 @@
 
   .attribute__label {
     width: 33%;
+    padding-right: 2.5rem;
+  }
+
+  .prices__sale .price--current {
+    font-size: 7.5rem;
+  }
+
+  .prices__sale .price--regular {
+    font-size: 3rem;
+  }
+
+  .prices__sale .price__label {
+    font-size: 1.5rem;
+  }
+
+  .details {
+    font-size: 1.5rem;
+  }
+
+  .qr-code__image {
+    height: 7.5rem;
+  }
+
+  .footer {
+    font-size: 1rem;
+  }
+}
+
+.A5-body-wrapper {
+  .label__title {
+    font-size: 4rem;
   }
 
   .prices__sale .price--current {
@@ -75,34 +102,8 @@
     font-size: 1.5rem;
   }
 
-  .attribute__label {
-    padding-right: 2.5rem;
-  }
-
-  .footer {
-    font-size: 1rem;
-  }
-}
-
-.A5-body-wrapper {
-  .label__title {
-    font-size: 4rem;
-  }
-
- .prices__sale .price--current {
-    font-size: 8rem;
-  }
-
-  .prices__sale .price--regular {
-    font-size: 3rem;
-  }
-
-  .prices__sale .price__label {
-    font-size: 1.5rem;
-  }
-
   .details {
-    font-size: 1.3rem;
+    font-size: 1.5rem;
   }
 
   .attribute__label {
@@ -112,18 +113,21 @@
   .qr-code__image {
     height: 8.5rem;
   }
-  
+
   .footer {
-    font-size: 1.1rem;
+    font-size: 0.9rem;
+    &__additional-text {
+      display: inline;
+    }
   }
 }
 
 .A4-body-wrapper {
- .label__title {
+  .label__title {
     font-size: 4.2rem;
   }
 
- .prices__sale .price--current {
+  .prices__sale .price--current {
     font-size: 8rem;
   }
 
@@ -136,7 +140,7 @@
   }
 
   .details {
-    font-size: 1.3rem;
+    font-size: 1.5rem;
   }
 
   .attribute__label {
@@ -148,44 +152,7 @@
   }
 
   .footer {
-    font-size: 0.93rem;
-    &__additional-text {
-      display: inline;
-    }
-  }
-}
-
-.A3-body-wrapper {
-  .label__title {
-    font-size: 4.2rem;
-  }
-
- .prices__sale .price--current {
-    font-size: 8rem;
-  }
-
-  .prices__sale .price--regular {
-    font-size: 3rem;
-  }
-
-  .prices__sale .price__label {
-    font-size: 1.5rem;
-  }
-
-  .details {
-    font-size: 1.2rem;
-  }
-
-  .attribute__label {
-    padding-right: 2.5rem;
-  }
-
-  .qr-code__image {
-    height: 8.3rem;
-  }
-
-  .footer {
-    font-size: 0.9rem;
+    font-size: 0.95rem;
     &__additional-text {
       display: inline;
     }

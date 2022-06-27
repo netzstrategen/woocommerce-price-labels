@@ -4,7 +4,7 @@
 
 namespace Composer\Autoload;
 
-class ComposerStaticInitbab12fd8457558f2304ed13b290d96d1
+class ComposerStaticInit191ae02f87b9d1f4fcf6de6bd885af54
 {
     public static $files = array (
         '6e3fae29631ef280660b3cdad06f25a8' => __DIR__ . '/..' . '/symfony/deprecation-contracts/function.php',
@@ -41,6 +41,7 @@ class ComposerStaticInitbab12fd8457558f2304ed13b290d96d1
         'M' => 
         array (
             'MyCLabs\\Enum\\' => 13,
+            'Masterminds\\' => 12,
         ),
         'F' => 
         array (
@@ -122,6 +123,10 @@ class ComposerStaticInitbab12fd8457558f2304ed13b290d96d1
         array (
             0 => __DIR__ . '/..' . '/myclabs/php-enum/src',
         ),
+        'Masterminds\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/masterminds/html5/src',
+        ),
         'FontLib\\' => 
         array (
             0 => __DIR__ . '/..' . '/phenx/php-font-lib/src/FontLib',
@@ -151,11 +156,6 @@ class ComposerStaticInitbab12fd8457558f2304ed13b290d96d1
     public static $classMap = array (
         'Attribute' => __DIR__ . '/..' . '/symfony/polyfill-php80/Resources/stubs/Attribute.php',
         'Dompdf\\Cpdf' => __DIR__ . '/..' . '/dompdf/dompdf/lib/Cpdf.php',
-        'HTML5_Data' => __DIR__ . '/..' . '/dompdf/dompdf/lib/html5lib/Data.php',
-        'HTML5_InputStream' => __DIR__ . '/..' . '/dompdf/dompdf/lib/html5lib/InputStream.php',
-        'HTML5_Parser' => __DIR__ . '/..' . '/dompdf/dompdf/lib/html5lib/Parser.php',
-        'HTML5_Tokenizer' => __DIR__ . '/..' . '/dompdf/dompdf/lib/html5lib/Tokenizer.php',
-        'HTML5_TreeBuilder' => __DIR__ . '/..' . '/dompdf/dompdf/lib/html5lib/TreeBuilder.php',
         'JsonException' => __DIR__ . '/..' . '/symfony/polyfill-php73/Resources/stubs/JsonException.php',
         'Normalizer' => __DIR__ . '/..' . '/symfony/polyfill-intl-normalizer/Resources/stubs/Normalizer.php',
         'PhpToken' => __DIR__ . '/..' . '/symfony/polyfill-php80/Resources/stubs/PhpToken.php',
@@ -167,9 +167,9 @@ class ComposerStaticInitbab12fd8457558f2304ed13b290d96d1
     public static function getInitializer(ClassLoader $loader)
     {
         return \Closure::bind(function () use ($loader) {
-            $loader->prefixLengthsPsr4 = ComposerStaticInitbab12fd8457558f2304ed13b290d96d1::$prefixLengthsPsr4;
-            $loader->prefixDirsPsr4 = ComposerStaticInitbab12fd8457558f2304ed13b290d96d1::$prefixDirsPsr4;
-            $loader->classMap = ComposerStaticInitbab12fd8457558f2304ed13b290d96d1::$classMap;
+            $loader->prefixLengthsPsr4 = ComposerStaticInit191ae02f87b9d1f4fcf6de6bd885af54::$prefixLengthsPsr4;
+            $loader->prefixDirsPsr4 = ComposerStaticInit191ae02f87b9d1f4fcf6de6bd885af54::$prefixDirsPsr4;
+            $loader->classMap = ComposerStaticInit191ae02f87b9d1f4fcf6de6bd885af54::$classMap;
 
         }, null, ClassLoader::class);
     }

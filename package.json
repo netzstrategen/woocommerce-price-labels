@@ -17,6 +17,7 @@
   "gulpPaths": {
     "destDir": "./dist",
     "fonts": {
+      "srcDir": "./assets/fonts",
       "src": "./assets/fonts/**/*.{eot,svg,ttf,woff,woff2}",
       "dest": "./dist/fonts"
     },

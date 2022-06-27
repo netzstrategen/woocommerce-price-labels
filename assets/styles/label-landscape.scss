@@ -1,13 +1,9 @@
 .label__title {
+  border-bottom: 1px #000 solid;
+  margin: 0.4rem 0;
   font-size: 5.5rem;
   text-transform: uppercase;
   text-align: center;
-  border-bottom: 1px #000 solid;
-  margin: 0.4rem 0;
-}
-
-.prices__sale .price--current {
-  font-size: 9rem;
 }
 
 .woocommerce-Price-currencySymbol {
@@ -31,7 +27,7 @@
 }
 
 .details {
-  font-size: 1.7rem;
+  font-size: 1.9rem;
 }
 
 .attribute__label {
@@ -43,11 +39,11 @@
 }
 
 .qr-code__image {
-  height: 8.5rem;
+  height: 9rem;
 }
 
 .footer {
-  font-size: 1.17rem;
+  font-size: 1.2rem;
   &__additional-text {
     display: inline;
   }

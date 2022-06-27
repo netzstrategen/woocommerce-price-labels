@@ -12,6 +12,33 @@
       width: 100%;
       font-size: <?= $font_base_size ?>;
     }
+    @font-face {
+      font-family: 'Helvetica Neue LT Pro';
+      src: url('<?= WP_PLUGIN_DIR ?>/woocommerce-price-labels/dist/fonts/HelveticaNeueLTPro-Lt.ttf') format('truetype');
+      font-weight: 300;
+      font-style: normal;
+    }
+
+    @font-face {
+      font-family: 'Helvetica Neue LT Pro';
+      src: url('<?= WP_PLUGIN_DIR ?>/woocommerce-price-labels/dist/fonts/HelveticaNeueLTPro-Bd.ttf') format('truetype');
+      font-weight: bold;
+      font-style: normal;
+    }
+
+    @font-face {
+      font-family: 'Helvetica Neue LT Pro';
+      src: url('<?= WP_PLUGIN_DIR ?>/woocommerce-price-labels/dist/fonts/HelveticaNeueLTPro-Md.ttf') format('truetype');
+      font-weight: 500;
+      font-style: normal;
+    }
+
+    @font-face {
+      font-family: 'Helvetica Neue LT Pro';
+      src: url('<?= WP_PLUGIN_DIR ?>/woocommerce-price-labels/dist/fonts/HelveticaNeueLTPro-Roman.ttf') format('truetype');
+      font-weight: normal;
+      font-style: normal;
+    }
     <?php
       include Plugin::getBasePath() . '/dist/styles/label.min.css';
       include Plugin::getBasePath() . '/dist/styles/label-landscape.min.css';
@@ -25,7 +52,7 @@
     <div class="prices">
       <div class="prices__sale">
         <p class="prices__amount price--current"><?= $formatted_sale_price ?> <span class="price__currency"><?= $currency_symbol ?></span></p>
-        <p class="prices__amount price--regular"><?= __('Instead of', Plugin::L10N) ?>: <?= $formatted_regular_price  ?> <span class="price__currency"><?= $currency_symbol ?></span> <span class="price__label">(UVP)</span></p>
+        <p class="prices__amount price--regular"><?= __('Instead of', Plugin::L10N) ?> <?= $formatted_regular_price  ?> <span class="price__currency"><?= $currency_symbol ?></span> <span class="price__label">(UVP)</span></p>
       </div>
     </div>
     <div class="details">
@@ -60,7 +87,7 @@
       
       <div class="qr-code">
         <p class="qr-code__help">
-          <?= __('Alle infos:', Plugin::L10N) ?>
+          <?= __('Alle Infos:', Plugin::L10N) ?>
         </p>
         <img class="qr-code__image" src="<?= $qr_code ?>" />
       </div>

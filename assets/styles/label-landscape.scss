@@ -43,7 +43,10 @@
 }
 
 .footer {
-  font-size: 1.2rem;
+  position: absolute;
+  right: 0;
+  left: 0;
+  font-size: 1.175rem;
   &__additional-text {
     display: inline;
   }

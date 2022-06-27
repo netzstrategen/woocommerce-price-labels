@@ -40,8 +40,8 @@
       font-style: normal;
     }
     <?php
-      include Plugin::getBasePath() . '/dist/styles/label.min.css';
-      include Plugin::getBasePath() . '/dist/styles/label-landscape.min.css';
+    include Plugin::getBasePath() . '/dist/styles/label.min.css';
+    include Plugin::getBasePath() . '/dist/styles/label-landscape.min.css';
     ?>
   </style>
 </head>

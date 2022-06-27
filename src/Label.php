@@ -21,10 +21,10 @@ class Label {
    * @array
    */
   const PDF_LABEL_FORMATS = [
+    'A7|portrait|6px' => 'A7, portrait',
     'A6|portrait|8px' => 'A6, portrait',
     'A5|portrait|11px' => 'A5, portrait',
     'A4|portrait|15px' => 'A4, portrait',
-    'A3|portrait|22px' => 'A3, portrait',
     'A3|landscape|24px' => 'A3, landscape',
   ];
 
@@ -136,10 +136,20 @@ class Label {
 
     // Number of chars per row for each attribute
     $max_row_chars = [
+      'A7' => 70,
       'A6' => 70,
       'A5' => 80,
       'A4' => 85,
       'A3' => 150,
+    ];
+
+    // Number of chars for short description.
+    $max_short_description_length = [
+      'A7' => 210,
+      'A6' => 210,
+      'A5' => 280,
+      'A4' => 300,
+      'A3' => 340,
     ];
 
     $data = [
@@ -156,6 +166,7 @@ class Label {
       'currency_symbol' => get_woocommerce_currency_symbol(),
       'font_base_size' => $label_format[2],
       'max_row_chars' => $max_row_chars[$label_format[0]] ?? NULL,
+      'max_short_description_length' => $max_short_description_length[$label_format[0]] ?? NULL,
     ];
 
     $attributes = static::getProductPriceLabelAttributes($product);
@@ -184,6 +195,7 @@ class Label {
     unset($attributes['Breite']);
     unset($attributes['Höhe']);
 
+    $data['short_description'] = static::getProductShortDescription($product);
     $data['attributes'] = $attributes;
 
     $qr_code_size = $label_format[1] === 'landscape' ? self::QR_CODE_SIZE_LANDSCAPE : self::QR_CODE_SIZE_PORTRAIT;
@@ -384,6 +396,60 @@ class Label {
     };
 
     return $attributes;
+  }
+
+  /**
+   * Retrieves the short description conditionally.
+   *
+   * @param \WC_Product $product
+   *   Product for which short description should be retrieved.
+   *
+   * @return string
+   *   Short description if field is selected.
+   */
+  public static function getProductShortDescription(WC_Product $product) {
+    $short_description = '';
+    $use_short_description = NULL;
+
+    $product_id = $product->get_type() === 'variation' ? $product->get_parent_id() : $product->get_id();
+
+    // Get the attributes assigned to the product primary category if it exists.
+    if (function_exists('yoast_get_primary_term_id')) {
+      if ($primary_term_product_id = yoast_get_primary_term_id('product_cat', $product_id)) {
+        $use_short_description = static::checkUseShortDescription($primary_term_product_id);
+      };
+    }
+
+    if ($use_short_description) {
+      if ($product->get_type() === 'variation') {
+        $parent_product = wc_get_product($product->get_parent_id());
+        $short_description = $parent_product->get_short_description();
+      }
+      else {
+        $short_description = $product->get_short_description();
+      }
+
+      if (!empty(($short_description))) {
+        $short_description = str_replace('</li>', ', ', $short_description);
+        $short_description = trim(strip_tags($short_description, '</li>'));
+        $short_description = rtrim($short_description, ', ');
+      }
+    }
+
+    return $short_description;
+  }
+
+  /**
+   * Checks "use short description" field for the given category.
+   *
+   * @param int $category_id
+   *   Unique category identifier.
+   *
+   * @return bool
+   *   Use short description insted of attributes.
+   */
+  public static function checkUseShortDescription($category_id) {
+    return get_field('acf_' . Plugin::PREFIX . '_use_product_short_description', 'product_cat_' . $category_id);
   }
 
   /**

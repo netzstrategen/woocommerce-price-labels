@@ -1,22 +1,9 @@
 .label__title {
-  font-size: 5.4rem;
+  font-size: 5.5rem;
   text-transform: uppercase;
   text-align: center;
-  font-weight: bold;
-}
-
-.prices {
-  padding: 1rem 0;
-  border-top: 1px #000 solid;
   border-bottom: 1px #000 solid;
-}
-
-.discount__value {
-  width: 9rem;
-  height: 9rem;
-  border-radius: 4.5rem;
-  font-size: 3.25rem;
-  line-height: 7rem;
+  margin: 0.4rem 0;
 }
 
 .prices__sale .price--current {
@@ -25,4 +12,43 @@
 
 .woocommerce-Price-currencySymbol {
   font-size: 0.5em;
+}
+
+.product-name {
+  font-size: 2.5rem;
+}
+
+.prices__sale .price--current {
+  font-size: 10rem;
+}
+
+.prices__sale .price--regular {
+  font-size: 3rem;
+}
+
+.prices__sale .price__label {
+  font-size: 1.5rem;
+}
+
+.details {
+  font-size: 1.7rem;
+}
+
+.attribute__label {
+  padding-right: 4.5rem;
+}
+
+.qr-code__help {
+  margin-bottom: 0.3em;
+}
+
+.qr-code__image {
+  height: 8.5rem;
+}
+
+.footer {
+  font-size: 1.17rem;
+  &__additional-text {
+    display: inline;
+  }
 }

@@ -29,7 +29,16 @@ class Pdf {
    *   The rendered PDF document.
    */
   public static function render(array $data, $size = 'A4', $orientation = 'portrait') {
-    $dompdf = new Dompdf();
+    $tmp = sys_get_temp_dir();
+
+    $dompdf = new Dompdf([
+      'logOutputFile' => '',
+      'isRemoteEnabled' => TRUE,
+      'fontDir' => $tmp,
+      'fontCache' => $tmp,
+      'tempDir' => $tmp,
+      'chroot' => $tmp,
+    ]);
 
     ob_start();
     $label_template = apply_filters(

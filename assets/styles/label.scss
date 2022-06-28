@@ -2,16 +2,8 @@
   box-sizing: border-box;
   padding: 0;
   margin: 0;
-  font-family:
-    Helvetica,
-    HelveticaNeue,
-    Helvetica Neue,
-    TeXGyreHerosCnBold,
-    Tahoma,
-    Geneva,
-    Arial Narrow,
-    Arial,
-    sans-serif;
+  font-family: Helvetica Neue LT Pro, Helvetica, Arial, sans-serif;
+  line-height: 1;
 }
 
 h2 {
@@ -28,14 +20,17 @@ th {
 }
 
 .label__title {
-  margin-top: 1rem;
+  padding: 0;
+  font-weight: 500;
 }
 
 .container {
+  position: relative;
   margin: 0 1.5rem;
 }
 
 .product-name {
+  margin: 0;
   text-align: center;
   font-size: 1.8rem;
   font-weight: bold;
@@ -43,11 +38,13 @@ th {
 
 .price--current,
 .price--current .price__currency {
+  margin-top: -1.5rem;
   font-weight: bold;
 }
 
 .price--regular,
 .price--regular .price__currency {
+  margin-top: -1rem;
   font-weight: bold;
 }
 
@@ -56,7 +53,7 @@ th {
 }
 
 .prices__sale {
-   border-bottom: 1px #000 solid;
+  border-bottom: 1px #000 solid;
 
   .price--current {
     color: #d12d37;
@@ -65,9 +62,9 @@ th {
   }
 
   .price--regular {
+    margin-bottom: 0.6rem;
     font-size: 2rem;
     text-align: right;
-    margin-bottom: 0.6rem;
   }
 }
 
@@ -75,6 +72,12 @@ th {
   margin-top: 0.3rem;
   margin-bottom: 1rem;
   font-size: 1.2rem;
+  font-weight: 300;
+}
+
+.attributes {
+  float: left;
+  margin: 0;
 }
 
 .short-description {
@@ -89,10 +92,6 @@ th {
   }
 }
 
-.attributes {
-  float: left;
-}
-
 .attribute__label {
   width: 25%;
   padding-right: 1rem;
@@ -100,14 +99,8 @@ th {
 
 .qr-code {
   float: right;
-  text-align: center;
   width: 15%;
-}
-
-.qr-code:after {
-  content: '';
-  height: 0;
-  clear: both;
+  text-align: center;
 }
 
 .qr-code__help {
@@ -122,15 +115,15 @@ th {
 }
 
 .footer {
-  clear:both;
   position: fixed;
-  right: 1.5rem;
-  bottom: 1rem;
-  left: 1.5rem;
+  right: 0.5rem;
+  bottom: 0.5rem;
+  left: 0.5rem;
   padding: 0.25rem 0;
   border-top: 1px black solid;
   font-size: 0.87rem;
   text-align: center;
+  clear: both;
 
   &__additional-text {
     display: none;

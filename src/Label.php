@@ -145,11 +145,11 @@ class Label {
 
     // Number of chars for short description.
     $max_short_description_length = [
-      'A7' => 210,
-      'A6' => 210,
-      'A5' => 280,
-      'A4' => 300,
-      'A3' => 340,
+      'A7' => 120,
+      'A6' => 130,
+      'A5' => 150,
+      'A4' => 200,
+      'A3' => 210,
     ];
 
     $data = [

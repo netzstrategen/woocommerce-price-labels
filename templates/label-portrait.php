@@ -47,7 +47,7 @@ namespace Netzstrategen\WooCommercePriceLabels;
     ?>
   </style>
 </head>
-<body class="<?= $paper_size ?>-body-wrapper">
+<body class="<?= $paper_size ?>-body-wrapper <?= strlen($title) > 40 ? 'title-exceeds-40-chars' : ''; ?>">
   <div class="label-logo">
     <img src="<?= $label_logo ?>" />
   </div>

@@ -163,3 +163,26 @@
     }
   }
 }
+
+.title-exceeds-40-chars {
+  &.A7-body-wrapper,
+  &.A6-body-wrapper {
+    .label__title {
+      font-size: 3rem;
+    }
+
+    .prices__sale .price--current {
+      font-size: 6rem;
+    }
+  }
+  &.A5-body-wrapper,
+  &.A4-body-wrapper {
+    .label__title {
+      font-size: 3.5rem;
+    }
+
+    .prices__sale .price--current {
+      font-size: 7rem;
+    }
+  }
+}

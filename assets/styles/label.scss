@@ -78,6 +78,7 @@ th {
 .attributes {
   float: left;
   margin: 0;
+  width: 75%;
 }
 
 .short-description {
@@ -86,6 +87,7 @@ th {
 
   .attributes {
     float: none;
+    width: 100%;
     & + p {
       padding-left: 0.2rem;
     }

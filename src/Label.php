@@ -28,6 +28,14 @@ class Label {
     'A3|landscape|24px' => 'A3, landscape',
   ];
 
+  const PDF_LABEL_COLORS = [
+    'e6002e' => 'Red',
+    'b8143d' => 'Dark Red',
+    'f20000' => 'Bright Red',
+    '002680' => 'Blue',
+    'ff3300' => 'Orange',
+  ];
+
   /**
    * Size of QR code to include in the PDF label document.
    *
@@ -81,7 +89,8 @@ class Label {
   public static function addPrintPriceLabelControls() {
     $product_id = get_the_ID();
     $label_format_default = get_option(Plugin::PREFIX . '-format');
-    Label::addProductPriceLabelControls($product_id, $label_format_default);
+    $label_color_default = get_option(Plugin::PREFIX . '-color');
+    Label::addProductPriceLabelControls($product_id, $label_format_default, $label_color_default);
   }
 
   /**
@@ -112,6 +121,13 @@ class Label {
     }
     else {
       $label_format = explode('|', get_option(Plugin::PREFIX . '-format', array_keys(static::PDF_LABEL_FORMATS)[0]));
+    }
+
+    if (isset($_GET['color'])) {
+      $label_color = '#' . $_GET['color'];
+    }
+    else {
+      $label_color = '#' . get_option(Plugin::PREFIX . '-color', array_keys(static::PDF_LABEL_COLORS)[0]);
     }
 
     $regular_price = $product->get_regular_price();
@@ -155,6 +171,7 @@ class Label {
     $data = [
       'paper_size' => $label_format[0],
       'orientation' => $label_format[1],
+      'color' => $label_color,
       'label_logo' => Plugin::imageToBase64($label_logo),
       'title' => $product->get_title(),
       'price' => wc_price($product->get_price()),
@@ -216,8 +233,9 @@ class Label {
    * @param bool $enabled
    *   If TRUE the controls are enabled.
    */
-  public static function addProductPriceLabelControls($product_id, $label_format_default = '', $enabled = TRUE) {
+  public static function addProductPriceLabelControls($product_id, $label_format_default = '', $label_color_default = '', $enabled = TRUE) {
     Label::displayPriceLabelFormatsSelect(Label::PDF_LABEL_FORMATS, $label_format_default, $enabled);
+    Label::displayPriceLabelColorsSelect(Label::PDF_LABEL_COLORS, $label_color_default, $enabled);
     Label::displayPriceLabelPrintButton($product_id, __('Print Sale PDF label', Plugin::L10N), $enabled);
   }
 
@@ -251,6 +269,34 @@ class Label {
   }
 
   /**
+   * Displays a select list with the available price label colors.
+   *
+   * @param array $label_colors
+   *   Available colors for the price label.
+   * @param string $label_color_default
+   *   Default label color.
+   */
+  public static function displayPriceLabelColorsSelect(array $label_colors, $label_color_default = '') {
+    if (empty($label_color_default)) {
+      $label_color_default = array_keys($label_colors)[0];
+    }
+    ?>
+    <select
+      class="<?= Plugin::PREFIX ?>-color"
+      style="margin-right: 8px;"
+    >
+    <?php foreach ($label_colors as $key => $color): ?>
+      <option
+        value="<?= $key ?>"
+        <?= selected($key, $label_color_default, FALSE) ?>>
+        <?= $color ?>
+      </option>
+    <?php endforeach; ?>
+    </select>
+    <?php
+  }
+
+  /**
    * Displays the button to print the price label.
    *
    * @param int $product_id
@@ -263,6 +309,7 @@ class Label {
       'post' => $product_id,
       'action' => 'label',
       'format' => get_option(Plugin::PREFIX . '-format', array_keys(static::PDF_LABEL_FORMATS)[0]),
+      'color' => get_option(Plugin::PREFIX . '-color', array_keys(static::PDF_LABEL_COLORS)[0]),
     ];
     $link = add_query_arg($args, get_admin_url() . 'post.php');
     ?>

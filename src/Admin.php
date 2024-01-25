@@ -13,16 +13,21 @@ namespace Netzstrategen\WooCommercePriceLabels;
 class Admin {
 
   /**
+   * @uses init
+   */
+  public static function preInit() {
+    // Adds a configuration section to woocommerce products settings tab.
+    add_filter('woocommerce_get_sections_products', __CLASS__ . '::woocommerce_get_sections_products');
+    add_filter('woocommerce_get_settings_products', __CLASS__ . '::woocommerce_get_settings_products', 10, 2);
+  }
+
+  /**
    * @implements admin_init
    */
   public static function init() {
     if (function_exists('register_field_group')) {
       static::register_acf();
     }
-
-    // Adds a configuration section to woocommerce products settings tab.
-    add_filter('woocommerce_get_sections_products', __CLASS__ . '::woocommerce_get_sections_products');
-    add_filter('woocommerce_get_settings_products', __CLASS__ . '::woocommerce_get_settings_products', 10, 2);
 
     // Adds price label format and print controls to product price sections.
     add_action('woocommerce_product_options_pricing', __CLASS__ . '::woocommerce_product_options_pricing', 9);
@@ -118,6 +123,12 @@ class Admin {
           'options' => Label::PDF_LABEL_FORMATS,
         ],
         [
+          'id' => Plugin::PREFIX . '-color',
+          'name' => __('Default label color', Plugin::L10N),
+          'type' => 'select',
+          'options' => Label::PDF_LABEL_COLORS,
+        ],
+        [
           'type' => 'sectionend',
           'id' => Plugin::L10N,
         ],
@@ -134,7 +145,8 @@ class Admin {
   public static function woocommerce_product_options_pricing() {
     $product_id = get_the_ID();
     $label_format_default = get_option(Plugin::PREFIX . '-format');
-    Label::addProductPriceLabelControls($product_id, $label_format_default);
+    $label_color_default = get_option(Plugin::PREFIX . '-color');
+    Label::addProductPriceLabelControls($product_id, $label_format_default, $label_color_default);
   }
 
   /**
@@ -145,7 +157,8 @@ class Admin {
   public static function woocommerce_variation_options_pricing($loop, $variation_data, $variation) {
     $product_id = $variation->ID;
     $label_format_default = get_option(Plugin::PREFIX . '-format');
-    Label::addProductPriceLabelControls($product_id, $label_format_default);
+    $label_color_default = get_option(Plugin::PREFIX . '-color');
+    Label::addProductPriceLabelControls($product_id, $label_format_default, $label_color_default);
   }
 
   /**

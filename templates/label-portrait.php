@@ -41,6 +41,14 @@ namespace Netzstrategen\WooCommercePriceLabels;
       font-style: normal;
     }
 
+    .label-logo img {
+      background-color: <?= $color ?>
+    }
+
+    .prices .prices__sale .price--current {
+      color: <?= $color ?>
+    }
+
     <?php
     include Plugin::getBasePath() . '/dist/styles/label.min.css';
     include Plugin::getBasePath() . '/dist/styles/label-portrait.min.css';

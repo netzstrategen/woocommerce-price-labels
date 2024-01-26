@@ -40,8 +40,8 @@ register_uninstall_hook(__FILE__, __NAMESPACE__ . '\Schema::uninstall');
 
 add_action('plugins_loaded', __NAMESPACE__ . '\Plugin::loadTextdomain');
 add_action('init', __NAMESPACE__ . '\Plugin::init', 20);
-add_action('init', __NAMESPACE__ . '\Admin::preInit');
-add_action('admin_init', __NAMESPACE__ . '\Admin::init');
+add_action('init', __NAMESPACE__ . '\Admin::init');
+add_action('admin_init', __NAMESPACE__ . '\Admin::admin_init');
 
 // Capability 'edit-posts' is required to trigger the custom action to print
 // products price labels. It is temporarily added to the 'sale-editor' role,

@@ -15,7 +15,7 @@ class Admin {
   /**
    * @uses init
    */
-  public static function preInit() {
+  public static function init() {
     // Adds a configuration section to woocommerce products settings tab.
     add_filter('woocommerce_get_sections_products', __CLASS__ . '::woocommerce_get_sections_products');
     add_filter('woocommerce_get_settings_products', __CLASS__ . '::woocommerce_get_settings_products', 10, 2);
@@ -24,7 +24,7 @@ class Admin {
   /**
    * @implements admin_init
    */
-  public static function init() {
+  public static function admin_init() {
     if (function_exists('register_field_group')) {
       static::register_acf();
     }

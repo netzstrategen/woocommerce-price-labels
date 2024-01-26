@@ -5,9 +5,9 @@
   setPrintButtonLink();
   const $printLabelControls = $('.price-label-print');
 
-  // Sets the price label print format.
-  // Allows user to select the format of the price label to be printed.
-  $('body').on('change', '.woocommerce-price-labels-format', (event) => {
+  // Sets the price label print format and color.
+  // Allows user to select the format and the color of the price label to be printed.
+  $('body').on('change', '.woocommerce-price-labels-format, .woocommerce-price-labels-color', (event) => {
     setPrintButtonLink();
   });
 
@@ -35,9 +35,11 @@
     const $select = $('.woocommerce-price-labels-format');
     const $printButton = $select.siblings('.woocommerce-price-labels-button');
     const format = $select.val();
+    const color = $('.woocommerce-price-labels-color').val();
     const url = new URL($printButton.attr('href'));
 
     url.searchParams.set('format', format);
+    url.searchParams.set('color', color);
     $printButton.attr('href', url);
   }
 }(jQuery));

@@ -29,11 +29,11 @@ class Label {
   ];
 
   const PDF_LABEL_COLORS = [
-    'e6002e' => 'Red',
-    'b8143d' => 'Dark Red',
-    'f20000' => 'Bright Red',
-    '002680' => 'Blue',
-    'ff3300' => 'Orange',
+    'e6002e' => 'Abverkauf',
+    'b8143d' => 'WOPA',
+    'f20000' => 'McPolster/Sizz',
+    '002680' => 'Lampify',
+    'ff3300' => 'CASA/IN',
   ];
 
   /**

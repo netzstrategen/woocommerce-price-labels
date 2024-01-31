@@ -1,15 +1,17 @@
 .product__summary {
   .price-label-print {
     display: flex;
+    grid-gap: 8px;
     height: 45px;
   }
 
-  .woocommerce-price-labels-format {
-    width: 50%;
+  .woocommerce-price-labels-format,
+  .woocommerce-price-labels-color {
     height: 45px;
   }
 
   .button.button.woocommerce-price-labels-button {
+    flex-shrink: 0;
     margin-top: 0;
   }
 }
